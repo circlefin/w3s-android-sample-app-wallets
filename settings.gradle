@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
         Properties properties = new Properties()
         // Load local.properties
-        properties.load(project.rootProject.file('local.properties').newDataInputStream()) // load local.properties
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
         url properties.getProperty('pwsdk.maven.url')
         credentials {
