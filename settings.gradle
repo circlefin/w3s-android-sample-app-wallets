@@ -10,7 +10,15 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://maven.pkg.github.com/circlefin/w3s-android-sdk" }
+        Properties properties = new Properties()
+        // Load local.properties
+        properties.load(project.rootProject.file('local.properties').newDataInputStream()) // load local.properties
+
+        url properties.getProperty('pwsdk.maven.url')
+        credentials {
+            username = properties.getProperty('pwsdk.maven.username')
+            password = properties.getProperty('pwsdk.maven.password')
+        }
     }
 }
 rootProject.name = "W3s Sample Wallet"
