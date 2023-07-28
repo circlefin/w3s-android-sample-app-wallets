@@ -14,4 +14,3 @@
 
 ## Run the Sample App
 1. Edit `values/config.xml` ➜ `pw_app_id` to fill in your `APP ID`
- 
