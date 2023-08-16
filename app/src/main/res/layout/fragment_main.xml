@@ -8,7 +8,8 @@
     tools:context=".ui.main.MainFragment"
     android:clickable="true"
     android:focusableInTouchMode="true"
-    android:padding="16dp">
+    android:paddingVertical="16dp"
+    android:paddingHorizontal="24dp">
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="0dp"
@@ -27,86 +28,66 @@
             android:orientation="vertical"
             android:autoHandwritingEnabled="true"
             android:focusableInTouchMode="true">
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/endpoint_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/endpoint_edit"
-                    android:hint="@string/label_endpoint"
-                    android:background="@android:color/transparent"
-                    android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pw_endpoint"/>
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/app_id_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/app_id_edit"
-                    android:hint="@string/label_app_id"
-                    android:background="@android:color/transparent"
-                    android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pw_app_id"/>
-            </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/main_title"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:fontFamily="@font/inter_semi_bold"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/user_token_layout"
+            <include android:id="@+id/endpoint"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/user_token_edit"
-                    android:hint="@string/label_user_token"
-                    android:background="@android:color/transparent"
-                    android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                layout="@layout/layout_input_field"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/encryption_key_layout"
+            <include android:id="@+id/addId"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/encryption_key_edit"
-                    android:hint="@string/label_encryption_key"
-                    android:background="@android:color/transparent"
-                    android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                layout="@layout/layout_input_field"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/challenge_id_layout"
+            <include android:id="@+id/userToken"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/challenge_id_edit"
-                    android:hint="@string/label_challenge_id"
-                    android:background="@android:color/transparent"
-                    android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                layout="@layout/layout_input_field"/>
+
+            <include android:id="@+id/encryptionKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/layout_input_field"/>
+
+            <include android:id="@+id/challengeId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/layout_input_field"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 
-    <Button
+    <TextView
         android:id="@+id/execute"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:enabled="false"
         android:text="@string/action_execute"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/version"
+        android:layout_marginBottom="20dp"
+        style="@style/mainButton" />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:enabled="false"
+        android:textColor="@color/black"
+        style="@style/circlepw_metadata1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -116,9 +97,9 @@
         android:layout_marginTop="64dp"
         android:layout_marginBottom="64dp"
         android:visibility="gone"
+        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

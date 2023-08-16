@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item>
+    <selector>
+        <item android:state_enabled="false" android:state_activated="false">
+            <shape
+                android:shape="rectangle">
+                <corners android:radius="16dp" />
+                <solid android:color="@color/disabled_input_background" />
+                <stroke
+                    android:width="2dp"
+                    android:color="@color/input_boarder" />
+            </shape>
+        </item>
+        <item android:state_activated="true" android:drawable="@drawable/round_input_bg_focused"/>
+        <item>
+            <shape
+                android:shape="rectangle">
+                <corners android:radius="16dp" />
+                <solid android:color="@color/white" />
+                <stroke
+                    android:width="2dp"
+                    android:color="@color/input_boarder" />
+            </shape>
+        </item>
+    </selector>
+</item>
+</layer-list>

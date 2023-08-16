@@ -34,30 +34,8 @@ class MyLayoutProvider(context: Context) : LayoutProvider() {
         return super.getTextConfig(key)
     }
 
-    private fun getGradientColors(): IntArray? {
-        return intArrayOf(
-            Color.parseColor("#00B14F"),
-            Color.parseColor("#23B64B"),
-            Color.parseColor("#35BA47"),
-            Color.parseColor("#43BE43"),
-            Color.parseColor("#4FC23F"),
-            Color.parseColor("#59C53C"),
-            Color.parseColor("#62C838"),
-            Color.parseColor("#6ACA34"),
-            Color.parseColor("#71CD31"),
-            Color.parseColor("#77CF2D"),
-            Color.parseColor("#7DD02A"),
-            Color.parseColor("#82D228"),
-            Color.parseColor("#85D325"),
-            Color.parseColor("#88D424"),
-            Color.parseColor("#8AD522"),
-            Color.parseColor("#8CD521"),
-            Color.parseColor("#8CD521")
-        )
-    }
-
-    private fun getGradientTypeface(): Typeface? {
-        return ResourcesCompat.getFont(context!!, R.font.en_medium)
+    private fun getHeadingColors(): Int {
+        return Color.parseColor("#0073C3")
     }
 
     override fun getTextConfigs(key: TextsKey?): Array<TextConfig>? {
@@ -74,17 +52,17 @@ class MyLayoutProvider(context: Context) : LayoutProvider() {
 
             TextsKey.enterPinCodeHeadline -> return arrayOf(
                 TextConfig("Enter your "),
-                TextConfig("Web3 PIN", getGradientColors(), getGradientTypeface())
+                TextConfig("PIN", getHeadingColors(), null)
             )
 
             TextsKey.securityIntroHeadline -> return arrayOf(
                 TextConfig("Set up your "),
-                TextConfig("Recovery Method", getGradientColors(), getGradientTypeface())
+                TextConfig("Recovery Method", getHeadingColors(), null)
             )
 
             TextsKey.newPinCodeHeadline -> return arrayOf(
-                TextConfig("Enter your new "),
-                TextConfig("Web3 PIN", getGradientColors(), getGradientTypeface())
+                TextConfig("Enter your "),
+                TextConfig("PIN", getHeadingColors(), null)
             )
 
             TextsKey.securityIntroLink -> return arrayOf(
@@ -94,7 +72,7 @@ class MyLayoutProvider(context: Context) : LayoutProvider() {
 
             TextsKey.recoverPinCodeHeadline -> return arrayOf(
                 TextConfig("Recover your "),
-                TextConfig("Web3 PIN", getGradientColors(), getGradientTypeface())
+                TextConfig("PIN", getHeadingColors(), null)
             )
 
             else -> {}
@@ -104,22 +82,22 @@ class MyLayoutProvider(context: Context) : LayoutProvider() {
 
     override fun getIconTextConfigs(key: IconTextsKey?): Array<IconTextConfig>? {
         val url = arrayOf(
-            "https://path/intro_item1",
             "https://path/intro_item0",
+            "https://path/intro_item1",
             "https://path/intro_item2"
         )
         when (key) {
             IconTextsKey.securityConfirmationItems -> return arrayOf<IconTextConfig>(
                 IconTextConfig(
-                    RemoteImageSetter(R.drawable.ic_intro_item2_icon, url[2]),
+                    RemoteImageSetter(R.drawable.ic_intro_item0_icon, url[0]),
                     TextConfig("This is the only way to recover my account access. ")
                 ),
                 IconTextConfig(
-                    RemoteImageSetter(R.drawable.ic_intro_item0_icon, url[0]),
+                    RemoteImageSetter(R.drawable.ic_intro_item1_icon, url[1]),
                     TextConfig("Circle won’t store my answers so it’s my responsibility to remember them.")
                 ),
                 IconTextConfig(
-                    RemoteImageSetter(R.drawable.ic_intro_item0_icon, url[0]),
+                    RemoteImageSetter(R.drawable.ic_intro_item2_icon, url[2]),
                     TextConfig("I will lose access to my wallet and my digital assets if I forget my answers. ")
                 )
             )

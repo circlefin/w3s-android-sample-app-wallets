@@ -1,16 +1,97 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.W3sSampleWallet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.W3sSampleWallet" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue_main</item>
+        <item name="colorPrimaryVariant">@color/blue_main</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/blue_main</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
+
+    <style name="mainButton" parent="circlepw_mainButtonText">
+        <item name="android:textColor">@drawable/disabled_white_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:lines">1</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:background">@drawable/pressed_round_main_bt</item>
+    </style>
+
+    <style name="editText" parent="circlepw_body1">
+        <item name="android:textColor">@color/text_main</item>
+        <item name="android:textColorHint">@color/placeholder</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="circlepw_heading3">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:fontWeight" tools:targetApi="o">600</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="circlepw_heading4">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:fontWeight" tools:targetApi="o">600</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="circlepw_heading5">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:fontWeight" tools:targetApi="o">600</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="circlepw_body1">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:fontWeight" tools:targetApi="o">400</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="circlepw_body2">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:fontWeight" tools:targetApi="o">400</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="circlepw_caption1">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:fontWeight" tools:targetApi="o">600</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="circlepw_caption2">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:fontWeight" tools:targetApi="o">600</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="circlepw_metadata1">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="circlepw_metadata2">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="circlepw_actionText">
+        <item name="android:fontFamily">@font/inter_semi_bold</item>
+        <item name="android:fontWeight" tools:targetApi="o">600</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="circlepw_pinDigitText">
+        <item name="android:fontFamily">@font/inter_light</item>
+        <item name="android:fontWeight" tools:targetApi="o">300</item>
+        <item name="android:textSize">40sp</item>
+    </style>
+    <style name="circlepw_mainButtonText">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:fontWeight" tools:targetApi="o">500</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="circlepw_toolbarTitle">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:fontWeight" tools:targetApi="o">500</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>
