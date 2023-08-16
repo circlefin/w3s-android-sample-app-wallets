@@ -17,7 +17,9 @@ package com.circle.w3s.sample.wallet.ui.main
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +38,7 @@ import circle.programmablewallet.sdk.presentation.EventListener
 import circle.programmablewallet.sdk.presentation.SecurityQuestion
 import circle.programmablewallet.sdk.result.ExecuteResult
 import com.circle.w3s.sample.wallet.CustomActivity
+import com.circle.w3s.sample.wallet.R
 import com.circle.w3s.sample.wallet.databinding.FragmentMainBinding
 import com.circle.w3s.sample.wallet.pwcustom.MyLayoutProvider
 import com.circle.w3s.sample.wallet.pwcustom.MyViewSetterProvider
@@ -68,26 +71,45 @@ class MainFragment : Fragment(), EventListener {
         super.onViewCreated(view, savedInstanceState)
         init()
     }
-
+    private fun getVersionName(context: Context): String{
+        val packageManager = context.packageManager
+        val packageName = context.packageName
+        val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
+        } else {
+            packageManager.getPackageInfo(packageName, 0)
+        }
+        return packageInfo.versionName;
+    }
     private fun init(){
+        context?.let {
+            val versionName = getVersionName(it)
+            binding.version.text = versionName
+        }
         binding.execute.setOnClickListener { executePwSdk() }
         viewModel.executeFormState.observe(viewLifecycleOwner, Observer {
             val executeState = it ?: return@Observer
             binding.execute.isEnabled = executeState.isDataValid
         })
-        binding.endpointEdit.doAfterTextChanged {
+        binding.endpoint.inputTitle.setText(R.string.label_endpoint)
+        binding.addId.inputTitle.setText(R.string.label_app_id)
+        binding.userToken.inputTitle.setText(R.string.label_user_token)
+        binding.encryptionKey.inputTitle.setText(R.string.label_encryption_key)
+        binding.challengeId.inputTitle.setText(R.string.label_challenge_id)
+        binding.endpoint.inputValue.setText(R.string.pw_endpoint)
+        binding.endpoint.inputValue.doAfterTextChanged {
             executeDataChanged()
         }
-        binding.appIdEdit.doAfterTextChanged {
+        binding.addId.inputValue.doAfterTextChanged {
             executeDataChanged()
         }
-        binding.userTokenEdit.doAfterTextChanged {
+        binding.userToken.inputValue.doAfterTextChanged {
             executeDataChanged()
         }
-        binding.encryptionKeyEdit.doAfterTextChanged {
+        binding.encryptionKey.inputValue.doAfterTextChanged {
             executeDataChanged()
         }
-        binding.challengeIdEdit.doAfterTextChanged {
+        binding.challengeId.inputValue.doAfterTextChanged {
             executeDataChanged()
         }
     }
@@ -97,22 +119,22 @@ class MainFragment : Fragment(), EventListener {
     }
     private fun executeDataChanged(){
         viewModel.executeDataChanged(
-            binding.endpointEdit.text.toString(),
-            binding.appIdEdit.text.toString(),
-            binding.userTokenEdit.text.toString(),
-            binding.encryptionKeyEdit.text.toString(),
-            binding.challengeIdEdit.text.toString(),
+            binding.endpoint.inputValue.text.toString(),
+            binding.addId.inputValue.text.toString(),
+            binding.userToken.inputValue.text.toString(),
+            binding.encryptionKey.inputValue.text.toString(),
+            binding.challengeId.inputValue.text.toString(),
         )
     }
     private fun executePwSdk(){
-        KeyboardUtils.hideKeyboard(binding.challengeIdEdit)
+        KeyboardUtils.hideKeyboard(binding.challengeId.inputValue)
         binding.ll.requestFocus()
         try{
             WalletSdk.init(
                 requireContext().applicationContext,
                 WalletSdk.Configuration(
-                    binding.endpointEdit.text.toString(),
-                    binding.appIdEdit.text.toString()
+                    binding.endpoint.inputValue.text.toString(),
+                    binding.addId.inputValue.text.toString()
                 )
             )
         }catch (t: Throwable){
@@ -133,9 +155,9 @@ class MainFragment : Fragment(), EventListener {
         WalletSdk.setViewSetterProvider(context?.let { MyViewSetterProvider(it) })
         pwExecute(
             activity,
-            binding.userTokenEdit.text.toString(),
-            binding.encryptionKeyEdit.text.toString(),
-            binding.challengeIdEdit.text.toString()
+            binding.userToken.inputValue.text.toString(),
+            binding.encryptionKey.inputValue.text.toString(),
+            binding.challengeId.inputValue.text.toString()
         )
     }
     fun showSnack(message: String){
@@ -143,10 +165,10 @@ class MainFragment : Fragment(), EventListener {
             Snackbar.LENGTH_LONG).setAction("Action", null)
         snackbar.setActionTextColor(Color.BLACK)
         val snackbarView = snackbar.view
-        snackbarView.setBackgroundColor(Color.WHITE)
+        snackbarView.setBackgroundColor(Color.BLACK)
         val textView =
             snackbarView.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
-        textView.setTextColor(Color.BLACK)
+        textView.setTextColor(Color.WHITE)
         snackbar.show()
     }
     fun goCustom(context: Context, msg: String?) {
@@ -179,6 +201,12 @@ class MainFragment : Fragment(), EventListener {
                             ErrorCode.incorrectUserPin, ErrorCode.userPinLocked,
                             ErrorCode.incorrectSecurityAnswers, ErrorCode.securityAnswersLocked,
                             ErrorCode.insecurePinCode, ErrorCode.pinCodeNotMatched-> {}
+                            ErrorCode.networkError -> {
+                                context?.let {
+                                    goCustom(it, error.message)
+                                    return false
+                                }
+                            }
                             else -> context?.let { goCustom(it, error.message) }
                         }
                         return true // App will handle next step, SDK will keep the Activity.

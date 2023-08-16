@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">W3s Sample Wallet</string>
+    <string name="main_title">Programmable Wallet SDK Sample App</string>
     <string name="label_endpoint">Endpoint</string>
-    <string name="label_app_id">App ID</string>
-    <string name="label_user_token">User token</string>
-    <string name="label_encryption_key">Encryption key</string>
+    <string name="label_app_id">APP ID</string>
+    <string name="label_user_token">User Token</string>
+    <string name="label_encryption_key">Encryption Key</string>
     <string name="label_challenge_id">Challenge ID</string>
     <string name="invalid_endpoint">Please input endpoint</string>
     <string name="invalid_app_id">Please input app ID</string>
@@ -11,4 +12,5 @@
     <string name="invalid_encryption_key">Please input encryption key</string>
     <string name="invalid_challenge_id">Please input challenge ID</string>
     <string name="action_execute">Execute</string>
+    <string name="action_continue">Continue</string>
 </resources>

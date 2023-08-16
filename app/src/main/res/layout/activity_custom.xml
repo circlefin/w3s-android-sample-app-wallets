@@ -17,12 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/btMain"/>
-    <Button
+
+    <TextView
         android:id="@+id/btMain"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continue"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_gravity="start"
+        android:text="@string/action_continue"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        style="@style/mainButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

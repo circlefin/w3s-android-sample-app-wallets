@@ -1,0 +1,9 @@
+<resources>
+    <dimen name="main_bt_margin_bottom">25dp</dimen>
+    <dimen name="page_horizontal_padding">24dp</dimen>
+    <dimen name="main_bt_round">56dp</dimen>
+    <dimen name="input_layout_height">56dp</dimen>
+    <dimen name="input_layout_item_margin_top">24dp</dimen>
+    <dimen name="input_layout_margin_top">8dp</dimen>
+    <dimen name="input_layout_padding_horizontal">16dp</dimen>
+</resources>
