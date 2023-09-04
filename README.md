@@ -14,7 +14,6 @@
 
 ## Run the Sample App
 1. Edit `values/config.xml` ➜ `pw_app_id` to fill in your `APP ID`
-
 2. Add `local.properties` with maven repository settings:
 ```properties
 pwsdk.maven.url=https://maven.pkg.github.com/circlefin/w3s-android-sdk
@@ -22,3 +21,4 @@ pwsdk.maven.username=<GITHUB_USERNAME>
 # Fine-grained personal access tokens or classic with package read permission.
 pwsdk.maven.password=<GITHUB_PAT> 
 ``` 
+ 
