@@ -144,11 +144,13 @@ class MainFragment : Fragment(), EventListener {
         WalletSdk.addEventListener(this)
         WalletSdk.setSecurityQuestions(
             arrayOf(
-                SecurityQuestion("What was your childhood nickname?"),
-                SecurityQuestion("What is the name of your favorite childhood friend?"),
-                SecurityQuestion("In what city or town did your mother and father meet?"),
-                SecurityQuestion("What is the middle name of your oldest child?"),
-                SecurityQuestion("When is your birthday?", SecurityQuestion.InputType.datePicker)
+                SecurityQuestion("What is your father’s middle name?"),
+                SecurityQuestion("What is your favorite sports team?"),
+                SecurityQuestion("What is your mother’s maiden name?"),
+                SecurityQuestion("What is the name of your first pet?"),
+                SecurityQuestion("What is the name of the city you were born in?"),
+                SecurityQuestion("What is the name of the first street you lived on?"),
+                SecurityQuestion("When is your father’s birthday?", SecurityQuestion.InputType.datePicker)
             ))
 
         WalletSdk.setLayoutProvider(context?.let { MyLayoutProvider(it) })
