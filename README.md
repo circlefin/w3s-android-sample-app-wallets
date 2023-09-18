@@ -35,4 +35,5 @@ pwsdk.maven.password=<GITHUB_PAT>
  
  5. Fill the `App ID`, and execute it along with `User Token`, `Encryption Key` and `Challenge ID`.    
 
-<img src="readme_images/running_app.png" alt="drawing" width="300"/> 
+<img src="readme_images/running_app.png" alt="drawing" width="300"/>
+
