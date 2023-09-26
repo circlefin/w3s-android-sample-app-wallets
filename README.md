@@ -5,6 +5,7 @@
 - Bookmark
   - [Requirement](#requirement)
   - [Run the Sample App](#run-the-sample-app)
+  - [Demo]
 ---
 
 
@@ -37,3 +38,5 @@ pwsdk.maven.password=<GITHUB_PAT>
 
 <img src="readme_images/running_app.png" alt="drawing" width="300"/>
 
+## Demo
+You can just [download the APK from a GitHub Action build](https://github.com/circlefin/w3s-android-sample-app-wallets/actions), and try it on a real device/emulator.
