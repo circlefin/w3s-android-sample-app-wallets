@@ -1,0 +1,41 @@
+name: get-artifacts
+
+on:
+  pull_request:
+    branches: [ "master" ]
+  push:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+    runs-on: circle-small
+    steps:
+
+    - name: Checkout pw-android repository
+      uses: actions/checkout@v3
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+      with:
+        registries: "124945441934"
+
+    - name: Read secrets from AWS Secrets Manager into environment variables
+      uses: abhilash1in/aws-secrets-manager-action@v2.1.0
+      with:
+          parse-json: true
+          secrets: |
+            /ops/utilities/github-actions-bot/package-read-token
+
+    - name: "Download artifact"
+      run: |
+        OTHER_REPO="circlefin/w3s-android-sample-app-wallets-internal/test"
+        WF_NAME="main.yaml"
+        ARTIFACT_NAME="artifact"
+        RUN_ID=`gh run --repo ${OTHER_REPO} list --workflow ${WF_NAME} --json databaseId --jq .[0].databaseId`
+        gh run --repo ${OTHER_REPO} download ${RUN_ID} -n ${ARTIFACT_NAME}
+        # List the artifiact directory/files
+        ls -lR
+      env:
+        GITHUB_TOKEN: ${{ env._OPS_UTILITIES_GITHUB_ACTIONS_BOT_PACKAGE_READ_TOKEN }}
