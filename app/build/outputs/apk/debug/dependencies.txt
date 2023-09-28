@@ -6,13 +6,13 @@
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
 > Task :app:parseDebugLocalResources
-> Task :app:mapDebugSourceSetPaths
+> Task :app:mergeDebugResources
 > Task :app:checkDebugAarMetadata
+> Task :app:dataBindingGenBaseClassesDebug
+> Task :app:mapDebugSourceSetPaths
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
-> Task :app:mergeDebugResources
 > Task :app:processDebugMainManifest
-> Task :app:dataBindingGenBaseClassesDebug
 > Task :app:processDebugManifest
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugShaders
@@ -3717,5 +3717,5 @@ w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/util/
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
 
-BUILD SUCCESSFUL in 1m 10s
+BUILD SUCCESSFUL in 1m 17s
 34 actionable tasks: 34 executed
