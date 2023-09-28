@@ -13,6 +13,7 @@
 1. Java 17 is required for the sample app.
 
 ## Run the Sample App
+You can install [the latest APK](https://github.com/circlefin/w3s-android-sample-app-wallets/blob/master/app/build/outputs/apk/debug/app-debug.apk) or follow the instruction below to run on a device / emulator directly.
 1. Open the project by [Android Studio](https://developer.android.com/studio): File ➜ Open ➜ choose the project root folder.
 
 <img src="readme_images/open_project.png" alt="drawing" width="400"/> 
