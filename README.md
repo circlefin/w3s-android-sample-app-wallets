@@ -27,7 +27,7 @@ pwsdk.maven.username=<GITHUB_USERNAME>
 pwsdk.maven.password=<GITHUB_PAT>  
 ```
 > **Note**
-> When pasting the values above for <GITHUB_USERNAME> and <GITHUB_PAT>, make sure to not surround the values with quotes.
+> When pasting the values above for `<GITHUB_USERNAME>` and `<GITHUB_PAT>`, make sure to not surround the values with quotes.
 
 - Check the following links for creating PAT.
   - [Creating a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
