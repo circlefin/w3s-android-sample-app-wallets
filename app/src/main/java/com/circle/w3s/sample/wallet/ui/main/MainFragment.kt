@@ -138,6 +138,8 @@ class MainFragment : Fragment(), EventListener {
                 )
             )
 
+            WalletSdk.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
+
             WalletSdk.setSecurityQuestions(
                 arrayOf(
                     SecurityQuestion("What is your father’s middle name?"),
