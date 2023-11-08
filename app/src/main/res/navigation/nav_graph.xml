@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.circle.w3s.sample.wallet.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_resultFragment"
+            app:destination="@id/resultFragment" >
+
+            <argument
+                android:name="challengeId"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="challengeType"
+                app:argType="string"
+                app:nullable="true" />
+            <argument android:name="challengeStatus"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="errorCode"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="errorMessage"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="signature"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="warningType"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="warningMessage"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.circle.w3s.sample.wallet.ui.main.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <argument
+            android:name="challengeId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="challengeType"
+            app:argType="string"
+            app:nullable="true" />
+        <argument android:name="challengeStatus"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="errorCode"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="errorMessage"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="signature"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="warningType"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="warningMessage"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>

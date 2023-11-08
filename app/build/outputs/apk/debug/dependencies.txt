@@ -1,35 +1,3 @@
-> Task :app:preBuild UP-TO-DATE
-> Task :app:preDebugBuild UP-TO-DATE
-> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
-> Task :app:generateDebugResValues
-> Task :app:dataBindingMergeDependencyArtifactsDebug
-> Task :app:generateDebugResources
-> Task :app:packageDebugResources
-> Task :app:parseDebugLocalResources
-> Task :app:mapDebugSourceSetPaths
-> Task :app:checkDebugAarMetadata
-> Task :app:createDebugCompatibleScreenManifests
-> Task :app:extractDeepLinksDebug
-> Task :app:mergeDebugResources
-> Task :app:processDebugMainManifest
-> Task :app:dataBindingGenBaseClassesDebug
-> Task :app:processDebugManifest
-> Task :app:javaPreCompileDebug
-> Task :app:mergeDebugShaders
-> Task :app:compileDebugShaders NO-SOURCE
-> Task :app:generateDebugAssets UP-TO-DATE
-> Task :app:mergeDebugAssets
-> Task :app:processDebugJavaRes NO-SOURCE
-> Task :app:compressDebugAssets
-> Task :app:checkDebugDuplicateClasses
-> Task :app:desugarDebugFileDependencies
-> Task :app:mergeDebugJniLibFolders
-> Task :app:mergeLibDexDebug
-> Task :app:mergeDebugNativeLibs NO-SOURCE
-> Task :app:stripDebugDebugSymbols NO-SOURCE
-> Task :app:validateSigningDebug
-> Task :app:writeDebugAppMetadata
-> Task :app:writeDebugSigningConfigVersions
 
 > Task :app:dependencies
 
@@ -188,8 +156,7 @@ annotationProcessor - Classpath for the annotation processor for 'main'. (n)
 No dependencies
 
 api - API dependencies for 'main' sources. (n)
-+--- androidx.databinding:viewbinding:8.0.2 (n)
-\--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 (n)
+\--- androidx.databinding:viewbinding:8.0.2 (n)
 
 apiDependenciesMetadata
 +--- androidx.databinding:viewbinding:8.0.2
@@ -357,7 +324,7 @@ debugAndroidTestCompileClasspath - Compile classpath for /debugAndroidTest.
 |    |    \--- androidx.customview:customview:1.1.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |         \--- androidx.core:core:1.3.0 -> 1.9.0 (*)
-|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -409,7 +376,7 @@ debugAndroidTestCompileClasspath - Compile classpath for /debugAndroidTest.
 |    |         \--- androidx.print:print:1.0.0
 |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -423,14 +390,14 @@ debugAndroidTestCompileClasspath - Compile classpath for /debugAndroidTest.
 |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    \--- androidx.viewpager2:viewpager2:1.0.0
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |         \--- androidx.collection:collection:1.1.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1
 |    |    |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.8.0 (*)
@@ -451,19 +418,19 @@ debugAndroidTestCompileClasspath - Compile classpath for /debugAndroidTest.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.8.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
@@ -475,17 +442,17 @@ debugAndroidTestCompileClasspath - Compile classpath for /debugAndroidTest.
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
 +--- androidx.lifecycle:lifecycle-livedata-ktx:2.4.1
@@ -494,6 +461,14 @@ debugAndroidTestCompileClasspath - Compile classpath for /debugAndroidTest.
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+|    +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+|    |    \--- com.google.android.play:core:1.10.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 +--- androidx.test.ext:junit:{strictly 1.1.5} -> 1.1.5 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
 +--- androidx.test.espresso:espresso-core:{strictly 3.5.1} -> 3.5.1 (c)
@@ -706,7 +681,7 @@ debugCompileClasspath - Compile classpath for /debug.
 |    |    \--- androidx.customview:customview:1.1.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |         \--- androidx.core:core:1.3.0 -> 1.9.0 (*)
-|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -758,7 +733,7 @@ debugCompileClasspath - Compile classpath for /debug.
 |    |         \--- androidx.print:print:1.0.0
 |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -771,14 +746,14 @@ debugCompileClasspath - Compile classpath for /debug.
 |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    \--- androidx.viewpager2:viewpager2:1.0.0
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |         \--- androidx.collection:collection:1.1.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -799,19 +774,19 @@ debugCompileClasspath - Compile classpath for /debug.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
@@ -823,17 +798,17 @@ debugCompileClasspath - Compile classpath for /debug.
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
 +--- androidx.lifecycle:lifecycle-livedata-ktx:2.4.1
@@ -842,24 +817,36 @@ debugCompileClasspath - Compile classpath for /debug.
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+|    +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+|    |    \--- com.google.android.play:core:1.10.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 +--- circle.programmablewallet:sdk:{strictly 1.0.718} -> 1.0.718 (c)
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
 +--- androidx.appcompat:appcompat:{strictly 1.6.1} -> 1.6.1 (c)
 +--- com.google.android.material:material:{strictly 1.5.0} -> 1.5.0 (c)
 +--- androidx.constraintlayout:constraintlayout:{strictly 2.1.4} -> 2.1.4 (c)
-+--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
 +--- androidx.lifecycle:lifecycle-livedata-ktx:{strictly 2.4.1} -> 2.4.1 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.5.1} -> 2.5.1 (c)
++--- androidx.navigation:navigation-dynamic-features-fragment:{strictly 2.5.3} -> 2.5.3 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib:{strictly 1.8.20} -> 1.8.20 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:{strictly 1.8.20} -> 1.8.20 (c)
++--- androidx.navigation:navigation-fragment:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.core:core:{strictly 1.9.0} -> 1.9.0 (c)
 +--- androidx.activity:activity:{strictly 1.6.0} -> 1.6.0 (c)
 +--- androidx.appcompat:appcompat-resources:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.cursoradapter:cursoradapter:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.drawerlayout:drawerlayout:{strictly 1.1.1} -> 1.1.1 (c)
-+--- androidx.fragment:fragment:{strictly 1.5.2} -> 1.5.2 (c)
++--- androidx.fragment:fragment:{strictly 1.5.4} -> 1.5.4 (c)
 +--- androidx.savedstate:savedstate:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.cardview:cardview:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.coordinatorlayout:coordinatorlayout:{strictly 1.1.0} -> 1.1.0 (c)
@@ -870,20 +857,22 @@ debugCompileClasspath - Compile classpath for /debug.
 +--- androidx.transition:transition:{strictly 1.4.1} -> 1.4.1 (c)
 +--- androidx.vectordrawable:vectordrawable:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.viewpager2:viewpager2:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.navigation:navigation-fragment:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui:{strictly 2.5.2} -> 2.5.2 (c)
 +--- androidx.lifecycle:lifecycle-livedata:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core-ktx:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.6.1} -> 1.6.1 (c)
++--- androidx.navigation:navigation-dynamic-features-runtime:{strictly 2.5.3} -> 2.5.3 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.8.20} -> 1.8.20 (c)
 +--- org.jetbrains:annotations:{strictly 13.0} -> 13.0 (c)
++--- androidx.fragment:fragment-ktx:{strictly 1.5.4} -> 1.5.4 (c)
++--- androidx.navigation:navigation-runtime:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.slidingpanelayout:slidingpanelayout:{strictly 1.2.0} -> 1.2.0 (c)
++--- androidx.navigation:navigation-common-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.customview:customview:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.versionedparcelable:versionedparcelable:{strictly 1.1.1} -> 1.1.1 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-savedstate:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.vectordrawable:vectordrawable-animated:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.customview:customview:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.collection:collection:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.loader:loader:{strictly 1.0.0} -> 1.0.0 (c)
@@ -891,22 +880,19 @@ debugCompileClasspath - Compile classpath for /debug.
 +--- androidx.legacy:legacy-support-core-utils:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.arch.core:core-common:{strictly 2.1.0} -> 2.1.0 (c)
 +--- androidx.lifecycle:lifecycle-common:{strictly 2.5.1} -> 2.5.1 (c)
-+--- androidx.fragment:fragment-ktx:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.navigation:navigation-runtime:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.slidingpanelayout:slidingpanelayout:{strictly 1.2.0} -> 1.2.0 (c)
-+--- androidx.navigation:navigation-common-ktx:{strictly 2.5.2} -> 2.5.2 (c)
 +--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.6.1} -> 1.6.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:{strictly 1.6.1} -> 1.6.1 (c)
-+--- androidx.interpolator:interpolator:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.documentfile:documentfile:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.localbroadcastmanager:localbroadcastmanager:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.print:print:{strictly 1.0.0} -> 1.0.0 (c)
++--- com.google.android.play:core:{strictly 1.10.3} -> 1.10.3 (c)
 +--- androidx.activity:activity-ktx:{strictly 1.6.0} -> 1.6.0 (c)
 +--- androidx.collection:collection-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.savedstate:savedstate-ktx:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.5.1} -> 2.5.1 (c)
-\--- androidx.navigation:navigation-common:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-common:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.interpolator:interpolator:{strictly 1.0.0} -> 1.0.0 (c)
++--- androidx.documentfile:documentfile:{strictly 1.0.0} -> 1.0.0 (c)
++--- androidx.localbroadcastmanager:localbroadcastmanager:{strictly 1.0.0} -> 1.0.0 (c)
+\--- androidx.print:print:{strictly 1.0.0} -> 1.0.0 (c)
 
 debugCompileOnly - Compile only dependencies for 'debug' sources. (n)
 No dependencies
@@ -1059,7 +1045,7 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    |    |    |    +--- androidx.collection:collection:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core:1.3.0 -> 1.9.0 (*)
 |    |    |    |    \--- androidx.emoji2:emoji2:1.2.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -1116,7 +1102,7 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    |    |         \--- androidx.print:print:1.0.0
 |    |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -1130,7 +1116,7 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    |    \--- androidx.viewpager2:viewpager2:1.0.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |    |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |    |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |    |         \--- androidx.collection:collection:1.1.0 (*)
@@ -1147,7 +1133,7 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    |    |    \--- androidx.annotation:annotation:1.3.0
 |    |    +--- com.github.bumptech.glide:disklrucache:4.14.2
 |    |    +--- com.github.bumptech.glide:annotations:4.14.2
-|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4 (*)
 |    |    +--- androidx.vectordrawable:vectordrawable-animated:1.1.0 (*)
 |    |    +--- androidx.exifinterface:exifinterface:1.3.3
 |    |    |    \--- androidx.annotation:annotation:1.2.0 -> 1.3.0
@@ -1161,14 +1147,14 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |         +--- androidx.lifecycle:lifecycle-viewmodel:2.2.0 -> 2.5.1 (*)
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |         +--- androidx.core:core:1.3.2 -> 1.9.0 (*)
-|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.2 (*)
+|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.4 (*)
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0 (*)
 +--- androidx.appcompat:appcompat:1.6.1 (*)
 +--- com.google.android.material:material:1.5.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4 (*)
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -1190,20 +1176,20 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.collection:collection-ktx:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -1225,17 +1211,17 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    |    |    |    \--- androidx.core:core:1.3.2 -> 1.9.0 (*)
 |    |    |    \--- androidx.transition:transition:1.4.1 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         +--- androidx.transition:transition:1.3.0 -> 1.4.1 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
@@ -1244,7 +1230,15 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.4.1 -> 2.5.1 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
-\--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
+\--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+     +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+     |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+     |    \--- com.google.android.play:core:1.10.3
+     +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+     \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 
 debugRuntimeElements - Runtime elements for debug (n)
 No dependencies
@@ -1354,7 +1348,7 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 |    |    \--- androidx.customview:customview:1.1.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |         \--- androidx.core:core:1.3.0 -> 1.9.0 (*)
-|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -1406,7 +1400,7 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 |    |         \--- androidx.print:print:1.0.0
 |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -1419,14 +1413,14 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    \--- androidx.viewpager2:viewpager2:1.0.0
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |         \--- androidx.collection:collection:1.1.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -1447,19 +1441,19 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
@@ -1471,17 +1465,17 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
 +--- androidx.lifecycle:lifecycle-livedata-ktx:2.4.1
@@ -1490,6 +1484,14 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+|    +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+|    |    \--- com.google.android.play:core:1.10.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 +--- androidx.databinding:viewbinding:{strictly 8.0.2} -> 8.0.2 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.8.20} -> 1.8.20 (c)
@@ -1499,9 +1501,10 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.constraintlayout:constraintlayout:{strictly 2.1.4} -> 2.1.4 (c)
-+--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.lifecycle:lifecycle-livedata-ktx:{strictly 2.4.1} -> 2.4.1 (c)
++--- androidx.navigation:navigation-dynamic-features-fragment:{strictly 2.5.3} -> 2.5.3 (c)
 +--- junit:junit:4.13.2
 |    \--- org.hamcrest:hamcrest-core:1.3
 +--- junit:junit:{strictly 4.13.2} -> 4.13.2 (c)
@@ -1512,7 +1515,7 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 +--- androidx.appcompat:appcompat-resources:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.cursoradapter:cursoradapter:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.drawerlayout:drawerlayout:{strictly 1.1.1} -> 1.1.1 (c)
-+--- androidx.fragment:fragment:{strictly 1.5.2} -> 1.5.2 (c)
++--- androidx.fragment:fragment:{strictly 1.5.4} -> 1.5.4 (c)
 +--- androidx.savedstate:savedstate:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.cardview:cardview:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.coordinatorlayout:coordinatorlayout:{strictly 1.1.0} -> 1.1.0 (c)
@@ -1523,14 +1526,15 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 +--- androidx.transition:transition:{strictly 1.4.1} -> 1.4.1 (c)
 +--- androidx.vectordrawable:vectordrawable:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.viewpager2:viewpager2:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.navigation:navigation-fragment:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-fragment:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.lifecycle:lifecycle-livedata:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core-ktx:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.6.1} -> 1.6.1 (c)
++--- androidx.navigation:navigation-dynamic-features-runtime:{strictly 2.5.3} -> 2.5.3 (c)
 +--- org.hamcrest:hamcrest-core:{strictly 1.3} -> 1.3 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.8.20} -> 1.8.20 (c)
 +--- org.jetbrains:annotations:{strictly 13.0} -> 13.0 (c)
@@ -1545,13 +1549,14 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 +--- androidx.legacy:legacy-support-core-utils:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.arch.core:core-common:{strictly 2.1.0} -> 2.1.0 (c)
 +--- androidx.lifecycle:lifecycle-common:{strictly 2.5.1} -> 2.5.1 (c)
-+--- androidx.fragment:fragment-ktx:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.navigation:navigation-runtime:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.fragment:fragment-ktx:{strictly 1.5.4} -> 1.5.4 (c)
++--- androidx.navigation:navigation-runtime:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.slidingpanelayout:slidingpanelayout:{strictly 1.2.0} -> 1.2.0 (c)
-+--- androidx.navigation:navigation-common-ktx:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-common-ktx:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.6.1} -> 1.6.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:{strictly 1.6.1} -> 1.6.1 (c)
++--- com.google.android.play:core:{strictly 1.10.3} -> 1.10.3 (c)
 +--- androidx.interpolator:interpolator:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.documentfile:documentfile:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.localbroadcastmanager:localbroadcastmanager:{strictly 1.0.0} -> 1.0.0 (c)
@@ -1560,7 +1565,7 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 +--- androidx.collection:collection-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.savedstate:savedstate-ktx:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.5.1} -> 2.5.1 (c)
-\--- androidx.navigation:navigation-common:{strictly 2.5.2} -> 2.5.2 (c)
+\--- androidx.navigation:navigation-common:{strictly 2.5.3} -> 2.5.3 (c)
 
 debugUnitTestCompileOnly (n)
 No dependencies
@@ -1713,7 +1718,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    +--- androidx.collection:collection:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core:1.3.0 -> 1.9.0 (*)
 |    |    |    |    \--- androidx.emoji2:emoji2:1.2.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -1770,7 +1775,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |         \--- androidx.print:print:1.0.0
 |    |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -1784,7 +1789,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    |    \--- androidx.viewpager2:viewpager2:1.0.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |    |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |    |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |    |         \--- androidx.collection:collection:1.1.0 (*)
@@ -1801,7 +1806,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    \--- androidx.annotation:annotation:1.3.0
 |    |    +--- com.github.bumptech.glide:disklrucache:4.14.2
 |    |    +--- com.github.bumptech.glide:annotations:4.14.2
-|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4 (*)
 |    |    +--- androidx.vectordrawable:vectordrawable-animated:1.1.0 (*)
 |    |    +--- androidx.exifinterface:exifinterface:1.3.3
 |    |    |    \--- androidx.annotation:annotation:1.2.0 -> 1.3.0
@@ -1815,14 +1820,14 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |         +--- androidx.lifecycle:lifecycle-viewmodel:2.2.0 -> 2.5.1 (*)
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |         +--- androidx.core:core:1.3.2 -> 1.9.0 (*)
-|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.2 (*)
+|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.4 (*)
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0 (*)
 +--- androidx.appcompat:appcompat:1.6.1 (*)
 +--- com.google.android.material:material:1.5.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4 (*)
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -1844,20 +1849,20 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.collection:collection-ktx:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -1879,17 +1884,17 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    \--- androidx.core:core:1.3.2 -> 1.9.0 (*)
 |    |    |    \--- androidx.transition:transition:1.4.1 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         +--- androidx.transition:transition:1.3.0 -> 1.4.1 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
@@ -1898,7 +1903,15 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.4.1 -> 2.5.1 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
-\--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
+\--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+     +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+     |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+     |    \--- com.google.android.play:core:1.10.3
+     +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+     \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 
 debugUnitTestRuntimeOnly (n)
 No dependencies
@@ -1919,7 +1932,10 @@ implementation - Implementation only dependencies for 'main' sources. (n)
 +--- androidx.navigation:navigation-ui-ktx:2.5.2 (n)
 +--- androidx.annotation:annotation:1.3.0 (n)
 +--- androidx.lifecycle:lifecycle-livedata-ktx:2.4.1 (n)
-\--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 (n)
++--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 (n)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (n)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (n)
+\--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3 (n)
 
 implementationDependenciesMetadata
 +--- androidx.databinding:viewbinding:8.0.2
@@ -1999,7 +2015,7 @@ implementationDependenciesMetadata
 |    |    \--- androidx.customview:customview:1.1.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |         \--- androidx.core:core:1.3.0 -> 1.9.0 (*)
-|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -2051,7 +2067,7 @@ implementationDependenciesMetadata
 |    |         \--- androidx.print:print:1.0.0
 |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -2065,14 +2081,14 @@ implementationDependenciesMetadata
 |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    \--- androidx.viewpager2:viewpager2:1.0.0
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |         \--- androidx.collection:collection:1.1.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1
 |    |    |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.8.0 (*)
@@ -2093,19 +2109,19 @@ implementationDependenciesMetadata
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.8.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
@@ -2117,17 +2133,17 @@ implementationDependenciesMetadata
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
 +--- androidx.lifecycle:lifecycle-livedata-ktx:2.4.1
@@ -2135,7 +2151,15 @@ implementationDependenciesMetadata
 |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.4.1 -> 2.5.1 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
-\--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
+\--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+     +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+     |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+     |    \--- com.google.android.play:core:1.10.3
+     +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+     \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 
 intransitiveDependenciesMetadata
 No dependencies
@@ -2298,7 +2322,7 @@ releaseCompileClasspath - Compile classpath for /release.
 |    |    \--- androidx.customview:customview:1.1.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |         \--- androidx.core:core:1.3.0 -> 1.9.0 (*)
-|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -2350,7 +2374,7 @@ releaseCompileClasspath - Compile classpath for /release.
 |    |         \--- androidx.print:print:1.0.0
 |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -2363,14 +2387,14 @@ releaseCompileClasspath - Compile classpath for /release.
 |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    \--- androidx.viewpager2:viewpager2:1.0.0
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |         \--- androidx.collection:collection:1.1.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -2391,19 +2415,19 @@ releaseCompileClasspath - Compile classpath for /release.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
@@ -2415,17 +2439,17 @@ releaseCompileClasspath - Compile classpath for /release.
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
 +--- androidx.lifecycle:lifecycle-livedata-ktx:2.4.1
@@ -2434,6 +2458,14 @@ releaseCompileClasspath - Compile classpath for /release.
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+|    +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+|    |    \--- com.google.android.play:core:1.10.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 +--- androidx.databinding:viewbinding:{strictly 8.0.2} -> 8.0.2 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.8.20} -> 1.8.20 (c)
@@ -2443,9 +2475,10 @@ releaseCompileClasspath - Compile classpath for /release.
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.constraintlayout:constraintlayout:{strictly 2.1.4} -> 2.1.4 (c)
-+--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.lifecycle:lifecycle-livedata-ktx:{strictly 2.4.1} -> 2.4.1 (c)
++--- androidx.navigation:navigation-dynamic-features-fragment:{strictly 2.5.3} -> 2.5.3 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib:{strictly 1.8.20} -> 1.8.20 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:{strictly 1.8.20} -> 1.8.20 (c)
 +--- androidx.core:core:{strictly 1.9.0} -> 1.9.0 (c)
@@ -2453,7 +2486,7 @@ releaseCompileClasspath - Compile classpath for /release.
 +--- androidx.appcompat:appcompat-resources:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.cursoradapter:cursoradapter:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.drawerlayout:drawerlayout:{strictly 1.1.1} -> 1.1.1 (c)
-+--- androidx.fragment:fragment:{strictly 1.5.2} -> 1.5.2 (c)
++--- androidx.fragment:fragment:{strictly 1.5.4} -> 1.5.4 (c)
 +--- androidx.savedstate:savedstate:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.cardview:cardview:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.coordinatorlayout:coordinatorlayout:{strictly 1.1.0} -> 1.1.0 (c)
@@ -2464,14 +2497,15 @@ releaseCompileClasspath - Compile classpath for /release.
 +--- androidx.transition:transition:{strictly 1.4.1} -> 1.4.1 (c)
 +--- androidx.vectordrawable:vectordrawable:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.viewpager2:viewpager2:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.navigation:navigation-fragment:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-fragment:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.lifecycle:lifecycle-livedata:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core-ktx:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.6.1} -> 1.6.1 (c)
++--- androidx.navigation:navigation-dynamic-features-runtime:{strictly 2.5.3} -> 2.5.3 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.8.20} -> 1.8.20 (c)
 +--- org.jetbrains:annotations:{strictly 13.0} -> 13.0 (c)
 +--- androidx.versionedparcelable:versionedparcelable:{strictly 1.1.1} -> 1.1.1 (c)
@@ -2485,13 +2519,14 @@ releaseCompileClasspath - Compile classpath for /release.
 +--- androidx.legacy:legacy-support-core-utils:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.arch.core:core-common:{strictly 2.1.0} -> 2.1.0 (c)
 +--- androidx.lifecycle:lifecycle-common:{strictly 2.5.1} -> 2.5.1 (c)
-+--- androidx.fragment:fragment-ktx:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.navigation:navigation-runtime:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.fragment:fragment-ktx:{strictly 1.5.4} -> 1.5.4 (c)
++--- androidx.navigation:navigation-runtime:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.slidingpanelayout:slidingpanelayout:{strictly 1.2.0} -> 1.2.0 (c)
-+--- androidx.navigation:navigation-common-ktx:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-common-ktx:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.6.1} -> 1.6.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:{strictly 1.6.1} -> 1.6.1 (c)
++--- com.google.android.play:core:{strictly 1.10.3} -> 1.10.3 (c)
 +--- androidx.interpolator:interpolator:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.documentfile:documentfile:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.localbroadcastmanager:localbroadcastmanager:{strictly 1.0.0} -> 1.0.0 (c)
@@ -2500,7 +2535,7 @@ releaseCompileClasspath - Compile classpath for /release.
 +--- androidx.collection:collection-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.savedstate:savedstate-ktx:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.5.1} -> 2.5.1 (c)
-\--- androidx.navigation:navigation-common:{strictly 2.5.2} -> 2.5.2 (c)
+\--- androidx.navigation:navigation-common:{strictly 2.5.3} -> 2.5.3 (c)
 
 releaseCompileOnly - Compile only dependencies for 'release' sources. (n)
 No dependencies
@@ -2653,7 +2688,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    |    |    +--- androidx.collection:collection:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core:1.3.0 -> 1.9.0 (*)
 |    |    |    |    \--- androidx.emoji2:emoji2:1.2.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -2710,7 +2745,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    |         \--- androidx.print:print:1.0.0
 |    |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -2724,7 +2759,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    |    \--- androidx.viewpager2:viewpager2:1.0.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |    |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |    |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |    |         \--- androidx.collection:collection:1.1.0 (*)
@@ -2741,7 +2776,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    |    \--- androidx.annotation:annotation:1.3.0
 |    |    +--- com.github.bumptech.glide:disklrucache:4.14.2
 |    |    +--- com.github.bumptech.glide:annotations:4.14.2
-|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4 (*)
 |    |    +--- androidx.vectordrawable:vectordrawable-animated:1.1.0 (*)
 |    |    +--- androidx.exifinterface:exifinterface:1.3.3
 |    |    |    \--- androidx.annotation:annotation:1.2.0 -> 1.3.0
@@ -2755,14 +2790,14 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |         +--- androidx.lifecycle:lifecycle-viewmodel:2.2.0 -> 2.5.1 (*)
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |         +--- androidx.core:core:1.3.2 -> 1.9.0 (*)
-|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.2 (*)
+|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.4 (*)
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0 (*)
 +--- androidx.appcompat:appcompat:1.6.1 (*)
 +--- com.google.android.material:material:1.5.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4 (*)
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -2784,20 +2819,20 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.collection:collection-ktx:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -2819,17 +2854,17 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    |    |    \--- androidx.core:core:1.3.2 -> 1.9.0 (*)
 |    |    |    \--- androidx.transition:transition:1.4.1 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         +--- androidx.transition:transition:1.3.0 -> 1.4.1 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
@@ -2838,7 +2873,15 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.4.1 -> 2.5.1 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
-\--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
+\--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+     +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+     |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+     |    \--- com.google.android.play:core:1.10.3
+     +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+     \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 
 releaseRuntimeElements - Runtime elements for release (n)
 No dependencies
@@ -2947,7 +2990,7 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 |    |    \--- androidx.customview:customview:1.1.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |         \--- androidx.core:core:1.3.0 -> 1.9.0 (*)
-|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -2999,7 +3042,7 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 |    |         \--- androidx.print:print:1.0.0
 |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -3012,14 +3055,14 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    \--- androidx.viewpager2:viewpager2:1.0.0
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |         \--- androidx.collection:collection:1.1.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -3040,19 +3083,19 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
@@ -3064,17 +3107,17 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
 +--- androidx.lifecycle:lifecycle-livedata-ktx:2.4.1
@@ -3083,6 +3126,14 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+|    +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+|    |    \--- com.google.android.play:core:1.10.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 +--- project :app (*)
 +--- androidx.databinding:viewbinding:{strictly 8.0.2} -> 8.0.2 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
@@ -3093,9 +3144,10 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.constraintlayout:constraintlayout:{strictly 2.1.4} -> 2.1.4 (c)
-+--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-fragment-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui-ktx:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.lifecycle:lifecycle-livedata-ktx:{strictly 2.4.1} -> 2.4.1 (c)
++--- androidx.navigation:navigation-dynamic-features-fragment:{strictly 2.5.3} -> 2.5.3 (c)
 +--- junit:junit:4.13.2
 |    \--- org.hamcrest:hamcrest-core:1.3
 +--- junit:junit:{strictly 4.13.2} -> 4.13.2 (c)
@@ -3106,7 +3158,7 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 +--- androidx.appcompat:appcompat-resources:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.cursoradapter:cursoradapter:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.drawerlayout:drawerlayout:{strictly 1.1.1} -> 1.1.1 (c)
-+--- androidx.fragment:fragment:{strictly 1.5.2} -> 1.5.2 (c)
++--- androidx.fragment:fragment:{strictly 1.5.4} -> 1.5.4 (c)
 +--- androidx.savedstate:savedstate:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.cardview:cardview:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.coordinatorlayout:coordinatorlayout:{strictly 1.1.0} -> 1.1.0 (c)
@@ -3117,14 +3169,15 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 +--- androidx.transition:transition:{strictly 1.4.1} -> 1.4.1 (c)
 +--- androidx.vectordrawable:vectordrawable:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.viewpager2:viewpager2:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.navigation:navigation-fragment:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.2} -> 2.5.2 (c)
-+--- androidx.navigation:navigation-ui:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-fragment:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-runtime-ktx:{strictly 2.5.3} -> 2.5.3 (c)
++--- androidx.navigation:navigation-ui:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.lifecycle:lifecycle-livedata:{strictly 2.5.1} -> 2.5.1 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core-ktx:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel:{strictly 2.5.1} -> 2.5.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.6.1} -> 1.6.1 (c)
++--- androidx.navigation:navigation-dynamic-features-runtime:{strictly 2.5.3} -> 2.5.3 (c)
 +--- org.hamcrest:hamcrest-core:{strictly 1.3} -> 1.3 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.8.20} -> 1.8.20 (c)
 +--- org.jetbrains:annotations:{strictly 13.0} -> 13.0 (c)
@@ -3139,13 +3192,14 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 +--- androidx.legacy:legacy-support-core-utils:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.arch.core:core-common:{strictly 2.1.0} -> 2.1.0 (c)
 +--- androidx.lifecycle:lifecycle-common:{strictly 2.5.1} -> 2.5.1 (c)
-+--- androidx.fragment:fragment-ktx:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.navigation:navigation-runtime:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.fragment:fragment-ktx:{strictly 1.5.4} -> 1.5.4 (c)
++--- androidx.navigation:navigation-runtime:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.slidingpanelayout:slidingpanelayout:{strictly 1.2.0} -> 1.2.0 (c)
-+--- androidx.navigation:navigation-common-ktx:{strictly 2.5.2} -> 2.5.2 (c)
++--- androidx.navigation:navigation-common-ktx:{strictly 2.5.3} -> 2.5.3 (c)
 +--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.6.1} -> 1.6.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:{strictly 1.6.1} -> 1.6.1 (c)
++--- com.google.android.play:core:{strictly 1.10.3} -> 1.10.3 (c)
 +--- androidx.interpolator:interpolator:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.documentfile:documentfile:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.localbroadcastmanager:localbroadcastmanager:{strictly 1.0.0} -> 1.0.0 (c)
@@ -3154,7 +3208,7 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 +--- androidx.collection:collection-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.savedstate:savedstate-ktx:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.5.1} -> 2.5.1 (c)
-\--- androidx.navigation:navigation-common:{strictly 2.5.2} -> 2.5.2 (c)
+\--- androidx.navigation:navigation-common:{strictly 2.5.3} -> 2.5.3 (c)
 
 releaseUnitTestCompileOnly (n)
 No dependencies
@@ -3307,7 +3361,7 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    |    |    +--- androidx.collection:collection:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core:1.3.0 -> 1.9.0 (*)
 |    |    |    |    \--- androidx.emoji2:emoji2:1.2.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2
+|    |    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4
 |    |    |    |    +--- androidx.activity:activity:1.5.1 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
@@ -3364,7 +3418,7 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    |         \--- androidx.print:print:1.0.0
 |    |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.3.0 (*)
-|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.0.0 -> 1.5.4 (*)
 |    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.5.1 (*)
 |    |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
@@ -3378,7 +3432,7 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
 |    |    \--- androidx.viewpager2:viewpager2:1.0.0
 |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
-|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.2 (*)
+|    |         +--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |    |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
 |    |         +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
 |    |         \--- androidx.collection:collection:1.1.0 (*)
@@ -3395,7 +3449,7 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    |    \--- androidx.annotation:annotation:1.3.0
 |    |    +--- com.github.bumptech.glide:disklrucache:4.14.2
 |    |    +--- com.github.bumptech.glide:annotations:4.14.2
-|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.2 (*)
+|    |    +--- androidx.fragment:fragment:1.3.6 -> 1.5.4 (*)
 |    |    +--- androidx.vectordrawable:vectordrawable-animated:1.1.0 (*)
 |    |    +--- androidx.exifinterface:exifinterface:1.3.3
 |    |    |    \--- androidx.annotation:annotation:1.2.0 -> 1.3.0
@@ -3409,14 +3463,14 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |         +--- androidx.lifecycle:lifecycle-viewmodel:2.2.0 -> 2.5.1 (*)
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |         +--- androidx.core:core:1.3.2 -> 1.9.0 (*)
-|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.2 (*)
+|         \--- androidx.fragment:fragment:1.2.5 -> 1.5.4 (*)
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0 (*)
 +--- androidx.appcompat:appcompat:1.6.1 (*)
 +--- com.google.android.material:material:1.5.0 (*)
 +--- androidx.constraintlayout:constraintlayout:2.1.4 (*)
-+--- androidx.navigation:navigation-fragment-ktx:2.5.2
-|    +--- androidx.navigation:navigation-fragment:2.5.2
-|    |    +--- androidx.fragment:fragment-ktx:1.5.2
++--- androidx.navigation:navigation-fragment-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-fragment:2.5.3
+|    |    +--- androidx.fragment:fragment-ktx:1.5.4
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0
 |    |    |    |    +--- androidx.activity:activity:1.6.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -3438,20 +3492,20 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.8.20 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.9.0 (*)
-|    |    |    +--- androidx.fragment:fragment:1.5.2 (*)
+|    |    |    +--- androidx.fragment:fragment:1.5.4 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.5.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    |    +--- androidx.navigation:navigation-runtime:2.5.2
+|    |    +--- androidx.navigation:navigation-runtime:2.5.3
 |    |    |    +--- androidx.activity:activity-ktx:1.5.1 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |    |    +--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.5.1 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1 (*)
-|    |    |    +--- androidx.navigation:navigation-common:2.5.2
+|    |    |    +--- androidx.navigation:navigation-common:2.5.3
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    |    |    |    +--- androidx.collection:collection-ktx:1.1.0 (*)
 |    |    |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.9.0 (*)
@@ -3473,17 +3527,17 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    |    |    \--- androidx.core:core:1.3.2 -> 1.9.0 (*)
 |    |    |    \--- androidx.transition:transition:1.4.1 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-|    \--- androidx.navigation:navigation-runtime-ktx:2.5.2
-|         +--- androidx.navigation:navigation-common-ktx:2.5.2
-|         |    \--- androidx.navigation:navigation-common:2.5.2 (*)
-|         \--- androidx.navigation:navigation-runtime:2.5.2 (*)
-+--- androidx.navigation:navigation-ui-ktx:2.5.2
-|    +--- androidx.navigation:navigation-runtime-ktx:2.5.2 (*)
-|    \--- androidx.navigation:navigation-ui:2.5.2
+|    \--- androidx.navigation:navigation-runtime-ktx:2.5.3
+|         +--- androidx.navigation:navigation-common-ktx:2.5.3
+|         |    \--- androidx.navigation:navigation-common:2.5.3 (*)
+|         \--- androidx.navigation:navigation-runtime:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.2 -> 2.5.3
+|    +--- androidx.navigation:navigation-runtime-ktx:2.5.3 (*)
+|    \--- androidx.navigation:navigation-ui:2.5.3
 |         +--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |         +--- androidx.customview:customview:1.1.0 (*)
 |         +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|         +--- androidx.navigation:navigation-runtime:2.5.2 (*)
+|         +--- androidx.navigation:navigation-runtime:2.5.3 (*)
 |         +--- androidx.transition:transition:1.3.0 -> 1.4.1 (*)
 |         \--- com.google.android.material:material:1.4.0-beta01 -> 1.5.0 (*)
 +--- androidx.annotation:annotation:1.3.0
@@ -3492,7 +3546,15 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.4.1 -> 2.5.1 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.8.20 (*)
 |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.1 (*)
-\--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1 -> 2.5.1 (*)
++--- androidx.navigation:navigation-fragment-ktx:2.5.3 (*)
++--- androidx.navigation:navigation-ui-ktx:2.5.3 (*)
+\--- androidx.navigation:navigation-dynamic-features-fragment:2.5.3
+     +--- androidx.navigation:navigation-dynamic-features-runtime:2.5.3
+     |    +--- androidx.navigation:navigation-runtime:2.5.3 (*)
+     |    \--- com.google.android.play:core:1.10.3
+     +--- androidx.navigation:navigation-fragment:2.5.3 (*)
+     \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
 
 releaseUnitTestRuntimeOnly (n)
 No dependencies
@@ -3697,25 +3759,5 @@ No dependencies
 
 A web-based, searchable dependency report is available by adding the --scan option.
 
-> Task :app:processDebugManifestForPackage
-> Task :app:mergeExtDexDebug
-> Task :app:processDebugResources
-
-> Task :app:compileDebugKotlin
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/CustomActivity.kt:20:37 Parameter 'v' is never used, could be renamed to _
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/CustomActivity.kt:32:15 'onBackPressed(): Unit' is deprecated. Overrides deprecated member in 'androidx.core.app.ComponentActivity'. Deprecated in Java
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/ui/main/MainFragment.kt:86:28 'getPackageInfo(String, Int): PackageInfo!' is deprecated. Deprecated in Java
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/util/KeyboardUtils.kt:28:31 Unnecessary safe call on a non-null receiver of type InputMethodManager
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/util/KeyboardUtils.kt:28:72 'SHOW_FORCED: Int' is deprecated. Deprecated in Java
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/util/KeyboardUtils.kt:35:31 Unnecessary safe call on a non-null receiver of type InputMethodManager
-
-> Task :app:compileDebugJavaWithJavac
-> Task :app:dexBuilderDebug
-> Task :app:mergeProjectDexDebug
-> Task :app:mergeDebugJavaResource
-> Task :app:packageDebug
-> Task :app:createDebugApkListingFileRedirect
-> Task :app:assembleDebug
-
-BUILD SUCCESSFUL in 1m 12s
-34 actionable tasks: 34 executed
+BUILD SUCCESSFUL in 655ms
+1 actionable task: 1 executed

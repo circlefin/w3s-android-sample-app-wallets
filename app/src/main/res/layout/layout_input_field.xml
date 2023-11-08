@@ -37,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             style="@style/editText"
+            android:saveEnabled="false"
             android:imeOptions="actionNext"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

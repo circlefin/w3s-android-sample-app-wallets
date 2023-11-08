@@ -6,6 +6,7 @@
     <string name="label_user_token">User Token</string>
     <string name="label_encryption_key">Encryption Key</string>
     <string name="label_challenge_id">Challenge ID</string>
+    <string name="label_enable_biometrics">Biometrics</string>
     <string name="invalid_endpoint">Please input endpoint</string>
     <string name="invalid_app_id">Please input app ID</string>
     <string name="invalid_user_token">Please input user token</string>
@@ -13,4 +14,12 @@
     <string name="invalid_challenge_id">Please input challenge ID</string>
     <string name="action_execute">Execute</string>
     <string name="action_continue">Continue</string>
+    <string name="action_set_biometrics_pin">Set Biometrics Pin</string>
+    <string name="label_challenge_type">Challenge Type</string>
+    <string name="label_challenge_status">Challenge Status</string>
+    <string name="label_error_code">Error Code</string>
+    <string name="label_error_message">Error Message</string>
+    <string name="label_signature">Signature</string>
+    <string name="label_warning_type">Warning Type</string>
+    <string name="label_warning_message">Warning Message</string>
 </resources>

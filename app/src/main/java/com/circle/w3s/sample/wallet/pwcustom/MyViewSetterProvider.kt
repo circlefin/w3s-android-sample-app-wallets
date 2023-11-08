@@ -16,6 +16,7 @@ package com.circle.w3s.sample.wallet.pwcustom
 import android.content.Context
 import circle.programmablewallet.sdk.presentation.IImageViewSetter
 import circle.programmablewallet.sdk.presentation.IToolbarSetter
+import circle.programmablewallet.sdk.presentation.LocalImageSetter
 import circle.programmablewallet.sdk.presentation.RemoteImageSetter
 import circle.programmablewallet.sdk.presentation.RemoteToolbarImageSetter
 import circle.programmablewallet.sdk.presentation.Resource
@@ -70,6 +71,11 @@ class MyViewSetterProvider(context: Context) : ViewSetterProvider() {
                 R.drawable.ic_confirm_main_icon,
                 "https://path/ic_confirm_main_icon"
             )
+
+            Resource.Icon.biometricsAllowMain -> return LocalImageSetter(R.drawable.ic_biometrics_general)
+            Resource.Icon.showPin -> return LocalImageSetter(R.drawable.ic_show_pin)
+            Resource.Icon.hidePin -> return LocalImageSetter(R.drawable.ic_hide_pin)
+
 
             else -> {}
         }

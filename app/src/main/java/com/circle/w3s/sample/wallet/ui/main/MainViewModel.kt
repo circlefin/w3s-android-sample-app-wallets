@@ -17,25 +17,49 @@ package com.circle.w3s.sample.wallet.ui.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.circle.w3s.sample.wallet.R
+import androidx.navigation.NavDirections
 
 class MainViewModel : ViewModel() {
 
     private val _executeForm = MutableLiveData<ExecuteFormState>()
     val executeFormState: LiveData<ExecuteFormState> = _executeForm
-    fun executeDataChanged(endpoint: String, appId: String, userToken: String, encryptionKey: String, challengeId: String) {
-        if (endpoint.isBlank()) {
-            _executeForm.value = ExecuteFormState(endpointError = R.string.invalid_endpoint)
-        } else if (appId.isBlank()) {
-            _executeForm.value = ExecuteFormState(appIdError = R.string.invalid_app_id)
-        } else if (userToken.isBlank()) {
-            _executeForm.value = ExecuteFormState(userTokenError = R.string.invalid_user_token)
-        } else if (encryptionKey.isBlank()) {
-            _executeForm.value = ExecuteFormState(encryptionKeyError = R.string.invalid_encryption_key)
-        } else if (challengeId.isBlank()) {
-            _executeForm.value = ExecuteFormState(challengeIdError = R.string.invalid_challenge_id)
-        } else {
-            _executeForm.value = ExecuteFormState(isDataValid = true)
-        }
+    private val _naviDirections = MutableLiveData<NavDirections?>()
+    val naviDirections: LiveData<NavDirections?> = _naviDirections
+    private val _enableBiometrics = MutableLiveData(true)
+    val enableBiometrics: LiveData<Boolean> = _enableBiometrics
+    private val _isSetBiometricsPinDataValid = MutableLiveData(false)
+    val isSetBiometricsPinDataValid: LiveData<Boolean> = _isSetBiometricsPinDataValid
+
+
+    fun executeDataChanged(
+        endpoint: String,
+        appId: String,
+        userToken: String,
+        encryptionKey: String,
+        challengeId: String
+    ) {
+        var isSetBiometricsPinInputDataValid =
+            endpoint.isNotBlank() && appId.isNotBlank() && userToken.isNotBlank() && encryptionKey.isNotBlank()
+        _isSetBiometricsPinDataValid.value =
+            isSetBiometricsPinInputDataValid && _enableBiometrics.value == true
+        _executeForm.value = ExecuteFormState(
+            isSetBiometricsPinInputDataValid = isSetBiometricsPinInputDataValid,
+            isExecuteDataValid = isSetBiometricsPinInputDataValid && challengeId.isNotBlank(),
+            endpoint = endpoint,
+            appId = appId,
+            userToken = userToken,
+            encryptionKey = encryptionKey,
+            challengeId = challengeId,
+        )
+    }
+
+    fun setNaviDirections(directions: NavDirections?) {
+        _naviDirections.value = directions
+    }
+
+    fun setEnableBiometrics(value: Boolean) {
+        _enableBiometrics.value = value
+        _isSetBiometricsPinDataValid.value =
+            value && _executeForm.value?.isSetBiometricsPinInputDataValid == true
     }
 }
