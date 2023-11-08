@@ -14,10 +14,11 @@ package com.circle.w3s.sample.wallet.ui.main
 // limitations under the License.
 
 data class ExecuteFormState(
-    val endpointError: Int? = null,
-    val appIdError: Int? = null,
-    val userTokenError: Int? = null,
-    val encryptionKeyError: Int? = null,
-    val challengeIdError: Int? = null,
-    val isDataValid: Boolean = false
+    val endpoint: String? = null,
+    val appId: String? = null,
+    val userToken: String? = null,
+    val encryptionKey: String? = null,
+    val challengeId: String? = null,
+    val isExecuteDataValid: Boolean = false,
+    val isSetBiometricsPinInputDataValid: Boolean = false
 )

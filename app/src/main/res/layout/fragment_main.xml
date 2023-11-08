@@ -5,89 +5,114 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment"
     android:clickable="true"
     android:focusableInTouchMode="true"
+    android:paddingHorizontal="24dp"
     android:paddingVertical="16dp"
-    android:paddingHorizontal="24dp">
+    tools:context=".ui.main.MainFragment">
+
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/execute"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/execute">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.main.MainFragment"
-            android:orientation="vertical"
             android:autoHandwritingEnabled="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            tools:context=".ui.main.MainFragment">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/main_title"
-            android:textColor="@color/black"
-            android:textSize="32sp"
-            android:fontFamily="@font/inter_semi_bold"/>
-
-            <include android:id="@+id/endpoint"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                layout="@layout/layout_input_field"/>
+                android:layout_gravity="start"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="@string/main_title"
+                android:textColor="@color/black"
+                android:textSize="32sp" />
 
-            <include android:id="@+id/addId"
+            <include
+                android:id="@+id/endpoint"
+                layout="@layout/layout_input_field"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/layout_input_field"/>
+                android:layout_height="wrap_content" />
 
-            <include android:id="@+id/userToken"
+            <include
+                android:id="@+id/appId"
+                layout="@layout/layout_input_field"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/layout_input_field"/>
+                android:layout_height="wrap_content" />
 
-            <include android:id="@+id/encryptionKey"
+            <include
+                android:id="@+id/userToken"
+                layout="@layout/layout_input_field"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/layout_input_field"/>
+                android:layout_height="wrap_content" />
 
-            <include android:id="@+id/challengeId"
+            <include
+                android:id="@+id/encryptionKey"
+                layout="@layout/layout_input_field"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/layout_input_field"/>
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/challengeId"
+                layout="@layout/layout_input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
+                android:id="@+id/enableBiometrics"
+                layout="@layout/layout_input_toggle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 
     <TextView
         android:id="@+id/execute"
+        style="@style/mainButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:layout_marginBottom="20dp"
         android:enabled="false"
         android:text="@string/action_execute"
-        app:layout_constraintBottom_toTopOf="@+id/version"
+        app:layout_constraintBottom_toTopOf="@+id/setBiometricsPin" />
+
+    <TextView
+        android:id="@+id/setBiometricsPin"
+        style="@style/mainButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
         android:layout_marginBottom="20dp"
-        style="@style/mainButton" />
+        android:enabled="false"
+        android:text="@string/action_set_biometrics_pin"
+        app:layout_constraintBottom_toTopOf="@+id/version"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/version"
+        style="@style/circlepw_metadata1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:enabled="false"
         android:textColor="@color/black"
-        style="@style/circlepw_metadata1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -97,9 +122,9 @@
         android:layout_marginTop="64dp"
         android:layout_marginBottom="64dp"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

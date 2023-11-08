@@ -16,8 +16,6 @@ package com.circle.w3s.sample.wallet.pwcustom
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
-import androidx.core.content.res.ResourcesCompat
 import circle.programmablewallet.sdk.api.ApiError.ErrorCode
 import circle.programmablewallet.sdk.presentation.IconTextConfig
 import circle.programmablewallet.sdk.presentation.LayoutProvider

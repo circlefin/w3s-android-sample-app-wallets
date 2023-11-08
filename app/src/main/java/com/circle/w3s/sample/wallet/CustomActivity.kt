@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import circle.programmablewallet.sdk.WalletSdk
 
-class CustomActivity: AppCompatActivity() {
+class CustomActivity : AppCompatActivity() {
     companion object {
         const val ARG_MSG = "msg"
     }
@@ -35,7 +35,7 @@ class CustomActivity: AppCompatActivity() {
     /**
      * Bring SDK UI to the front and finish the Activity.
      */
-    private fun goBackToSdkUi(){
+    private fun goBackToSdkUi() {
         WalletSdk.moveTaskToFront()
         finish()
 
