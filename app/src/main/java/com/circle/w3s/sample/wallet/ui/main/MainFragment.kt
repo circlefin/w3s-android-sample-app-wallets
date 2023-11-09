@@ -184,6 +184,7 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         WalletSdk.addEventListener(this)
         WalletSdk.setLayoutProvider(context?.let { MyLayoutProvider(it) })
         WalletSdk.setViewSetterProvider(context?.let { MyViewSetterProvider(it) })
+        WalletSdk.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
         WalletSdk.setSecurityQuestions(
             arrayOf(
                 SecurityQuestion("What is your father’s middle name?"),
