@@ -27,8 +27,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import circle.programmablewallet.sdk.WalletSdk
@@ -49,17 +49,10 @@ import com.circle.w3s.sample.wallet.pwcustom.MyLayoutProvider
 import com.circle.w3s.sample.wallet.pwcustom.MyViewSetterProvider
 import com.circle.w3s.sample.wallet.util.KeyboardUtils
 import com.google.android.material.snackbar.Snackbar
-
+private val TAG = MainFragment::class.simpleName
 class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
-    private val TAG = MainFragment::class.simpleName
-
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: FragmentMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -182,9 +175,11 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
 
     private fun setupSdk() {
         WalletSdk.addEventListener(this)
-        WalletSdk.setLayoutProvider(context?.let { MyLayoutProvider(it) })
-        WalletSdk.setViewSetterProvider(context?.let { MyViewSetterProvider(it) })
-        WalletSdk.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
+        context?.let {
+            WalletSdk.setLayoutProvider(MyLayoutProvider(it))
+            WalletSdk.setViewSetterProvider(MyViewSetterProvider(it))
+            WalletSdk.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
+        }
         WalletSdk.setSecurityQuestions(
             arrayOf(
                 SecurityQuestion("What is your father’s middle name?"),
@@ -274,10 +269,8 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         context.startActivity(intent)
     }
 
-    override fun onEvent(event: ExecuteEvent?) {
-        event?.let {
-            goCustom(context, it.name)
-        }
+    override fun onEvent(event: ExecuteEvent) {
+        goCustom(context, event.name)
     }
 
     override fun onError(error: Throwable): Boolean {
@@ -311,12 +304,12 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         return true // App will handle next step, SDK will keep the Activity.
     }
 
-    override fun onWarning(warning: ExecuteWarning?, result: ExecuteResult?): Boolean {
+    override fun onWarning(warning: ExecuteWarning, result: ExecuteResult?): Boolean {
         setInProgress(false)
         setDirection(warning = warning, result = result)
         //return true, App will handle next step, SDK will keep the Activity.
         //return false, App won't handle next step, SDK will finish the Activity.
-        return false;
+        return false
     }
 
     override fun onResult(result: ExecuteResult) {

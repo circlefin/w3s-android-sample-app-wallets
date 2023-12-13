@@ -31,25 +31,17 @@ class MainViewModel : ViewModel() {
     val isSetBiometricsPinDataValid: LiveData<Boolean> = _isSetBiometricsPinDataValid
 
 
-    fun executeDataChanged(
-        endpoint: String,
-        appId: String,
-        userToken: String,
-        encryptionKey: String,
-        challengeId: String
-    ) {
-        var isSetBiometricsPinInputDataValid =
-            endpoint.isNotBlank() && appId.isNotBlank() && userToken.isNotBlank() && encryptionKey.isNotBlank()
-        _isSetBiometricsPinDataValid.value =
-            isSetBiometricsPinInputDataValid && _enableBiometrics.value == true
-        _executeForm.value = ExecuteFormState(
+    fun executeDataChanged(endpoint: String, appId: String, userToken: String, encryptionKey: String, challengeId: String) {
+        val isSetBiometricsPinInputDataValid = endpoint.isNotBlank() && appId.isNotBlank() && userToken.isNotBlank() && encryptionKey.isNotBlank()
+        _isSetBiometricsPinDataValid.value = isSetBiometricsPinInputDataValid && _enableBiometrics.value == true
+        _executeForm.value =  ExecuteFormState(
             isSetBiometricsPinInputDataValid = isSetBiometricsPinInputDataValid,
             isExecuteDataValid = isSetBiometricsPinInputDataValid && challengeId.isNotBlank(),
-            endpoint = endpoint,
-            appId = appId,
-            userToken = userToken,
-            encryptionKey = encryptionKey,
-            challengeId = challengeId,
+            endpoint =  endpoint,
+            appId =  appId,
+            userToken =  userToken,
+            encryptionKey =  encryptionKey,
+            challengeId =  challengeId,
         )
     }
 
@@ -57,9 +49,8 @@ class MainViewModel : ViewModel() {
         _naviDirections.value = directions
     }
 
-    fun setEnableBiometrics(value: Boolean) {
+    fun setEnableBiometrics(value: Boolean){
         _enableBiometrics.value = value
-        _isSetBiometricsPinDataValid.value =
-            value && _executeForm.value?.isSetBiometricsPinInputDataValid == true
+        _isSetBiometricsPinDataValid.value =  value && _executeForm.value?.isSetBiometricsPinInputDataValid == true
     }
 }

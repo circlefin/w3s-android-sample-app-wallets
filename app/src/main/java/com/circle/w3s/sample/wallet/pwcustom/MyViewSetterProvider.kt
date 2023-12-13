@@ -24,11 +24,10 @@ import circle.programmablewallet.sdk.presentation.Resource.ToolbarIcon
 import circle.programmablewallet.sdk.presentation.ViewSetterProvider
 import com.circle.w3s.sample.wallet.R
 
-class MyViewSetterProvider(context: Context) : ViewSetterProvider() {
-    var context: Context = context
+class MyViewSetterProvider(var context: Context) : ViewSetterProvider() {
 
 
-    override fun getToolbarImageSetter(type: ToolbarIcon?): IToolbarSetter? {
+    override fun getToolbarImageSetter(type: ToolbarIcon): IToolbarSetter? {
         when (type) {
             ToolbarIcon.back -> return RemoteToolbarImageSetter(
                 R.drawable.ic_back,
@@ -45,7 +44,7 @@ class MyViewSetterProvider(context: Context) : ViewSetterProvider() {
         return super.getToolbarImageSetter(type)
     }
 
-    override fun getImageSetter(type: Resource.Icon?): IImageViewSetter? {
+    override fun getImageSetter(type: Resource.Icon): IImageViewSetter? {
         when (type) {
             Resource.Icon.securityIntroMain -> return RemoteImageSetter(
                 R.drawable.ic_intro_main_icon,

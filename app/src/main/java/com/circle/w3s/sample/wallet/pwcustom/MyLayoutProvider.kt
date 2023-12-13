@@ -25,10 +25,9 @@ import circle.programmablewallet.sdk.presentation.Resource.TextsKey
 import circle.programmablewallet.sdk.presentation.TextConfig
 import com.circle.w3s.sample.wallet.R
 
-class MyLayoutProvider(context: Context) : LayoutProvider() {
-    private var context: Context = context
+class MyLayoutProvider(private var context: Context) : LayoutProvider() {
 
-    override fun getTextConfig(key: String?): TextConfig? {
+    override fun getTextConfig(key: String): TextConfig? {
         return super.getTextConfig(key)
     }
 
@@ -36,7 +35,7 @@ class MyLayoutProvider(context: Context) : LayoutProvider() {
         return Color.parseColor("#0073C3")
     }
 
-    override fun getTextConfigs(key: TextsKey?): Array<TextConfig>? {
+    override fun getTextConfigs(key: TextsKey): Array<TextConfig?>? {
         when (key) {
             TextsKey.securityQuestionHeaders -> return arrayOf(
                 TextConfig("Choose your 1st question"),
@@ -78,14 +77,14 @@ class MyLayoutProvider(context: Context) : LayoutProvider() {
         return super.getTextConfigs(key)
     }
 
-    override fun getIconTextConfigs(key: IconTextsKey?): Array<IconTextConfig>? {
+    override fun getIconTextConfigs(key: IconTextsKey): Array<IconTextConfig?>? {
         val url = arrayOf(
             "https://path/intro_item0",
             "https://path/intro_item1",
             "https://path/intro_item2"
         )
         when (key) {
-            IconTextsKey.securityConfirmationItems -> return arrayOf<IconTextConfig>(
+            IconTextsKey.securityConfirmationItems -> return arrayOf<IconTextConfig?>(
                 IconTextConfig(
                     RemoteImageSetter(R.drawable.ic_intro_item0_icon, url[0]),
                     TextConfig("This is the only way to recover my account access. ")
@@ -105,7 +104,7 @@ class MyLayoutProvider(context: Context) : LayoutProvider() {
         return super.getIconTextConfigs(key)
     }
 
-    override fun getErrorString(code: ErrorCode?): String? {
+    override fun getErrorString(code: ErrorCode): String? {
         return super.getErrorString(code)
     }
 }
