@@ -1,39 +1,3 @@
-> Task :app:preBuild UP-TO-DATE
-> Task :app:preDebugBuild UP-TO-DATE
-> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
-> Task :app:generateDebugResValues
-> Task :app:dataBindingMergeDependencyArtifactsDebug
-> Task :app:generateDebugResources
-> Task :app:packageDebugResources
-> Task :app:parseDebugLocalResources
-> Task :app:generateSafeArgsDebug
-> Task :app:mergeDebugResources
-> Task :app:checkDebugAarMetadata
-> Task :app:dataBindingGenBaseClassesDebug
-> Task :app:mapDebugSourceSetPaths
-> Task :app:createDebugCompatibleScreenManifests
-> Task :app:extractDeepLinksDebug
-> Task :app:processDebugMainManifest
-> Task :app:processDebugManifest
-> Task :app:javaPreCompileDebug
-> Task :app:mergeDebugShaders
-> Task :app:processDebugManifestForPackage
-> Task :app:compileDebugShaders NO-SOURCE
-> Task :app:generateDebugAssets UP-TO-DATE
-> Task :app:mergeDebugAssets
-> Task :app:processDebugJavaRes NO-SOURCE
-> Task :app:compressDebugAssets
-> Task :app:desugarDebugFileDependencies
-> Task :app:checkDebugDuplicateClasses
-> Task :app:mergeDebugJniLibFolders
-> Task :app:processDebugResources
-> Task :app:mergeExtDexDebug
-> Task :app:mergeLibDexDebug
-> Task :app:mergeDebugNativeLibs NO-SOURCE
-> Task :app:stripDebugDebugSymbols NO-SOURCE
-> Task :app:validateSigningDebug
-> Task :app:writeDebugAppMetadata
-> Task :app:writeDebugSigningConfigVersions
 
 > Task :app:dependencies
 
@@ -192,8 +156,7 @@ annotationProcessor - Classpath for the annotation processor for 'main'. (n)
 No dependencies
 
 api - API dependencies for 'main' sources. (n)
-+--- androidx.databinding:viewbinding:8.0.2 (n)
-\--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 (n)
+\--- androidx.databinding:viewbinding:8.0.2 (n)
 
 apiDependenciesMetadata
 +--- androidx.databinding:viewbinding:8.0.2
@@ -292,7 +255,7 @@ debugAndroidTestCompileClasspath - Compile classpath for /debugAndroidTest.
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
 +--- project :app (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 +--- androidx.core:core-ktx:1.8.0
 |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    +--- androidx.core:core:1.8.0 -> 1.9.0
@@ -647,7 +610,7 @@ debugCompileClasspath - Compile classpath for /debug.
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
 +--- androidx.databinding:viewbinding:{strictly 8.0.2} -> 8.0.2 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.8.20} -> 1.8.20 (c)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0
 |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    +--- androidx.core:core:1.9.0
@@ -862,7 +825,7 @@ debugCompileClasspath - Compile classpath for /debug.
 |    |    \--- com.google.android.play:core:1.10.3
 |    +--- androidx.navigation:navigation-fragment:2.5.3 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.20 (*)
-+--- circle.programmablewallet:sdk:{strictly 1.0.742} -> 1.0.742 (c)
++--- circle.programmablewallet:sdk:{strictly 1.0.718} -> 1.0.718 (c)
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
 +--- androidx.appcompat:appcompat:{strictly 1.6.1} -> 1.6.1 (c)
 +--- com.google.android.material:material:{strictly 1.5.0} -> 1.5.0 (c)
@@ -958,7 +921,7 @@ debugRuntimeClasspath - Runtime classpath of /debug.
 |    |    \--- org.jetbrains:annotations:13.0
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 |    +--- com.squareup.retrofit2:retrofit:2.9.0
 |    |    \--- com.squareup.okhttp3:okhttp:3.14.9 -> 4.9.0
 |    |         +--- com.squareup.okio:okio:2.8.0
@@ -1314,7 +1277,7 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
 +--- project :app (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0
 |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    +--- androidx.core:core:1.9.0
@@ -1532,7 +1495,7 @@ debugUnitTestCompileClasspath - Compile classpath for /debugUnitTest.
 +--- androidx.databinding:viewbinding:{strictly 8.0.2} -> 8.0.2 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.8.20} -> 1.8.20 (c)
-+--- circle.programmablewallet:sdk:{strictly 1.0.742} -> 1.0.742 (c)
++--- circle.programmablewallet:sdk:{strictly 1.0.718} -> 1.0.718 (c)
 +--- com.google.android.material:material:{strictly 1.5.0} -> 1.5.0 (c)
 +--- androidx.appcompat:appcompat:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
@@ -1631,7 +1594,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    \--- org.jetbrains:annotations:13.0
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 |    +--- com.squareup.retrofit2:retrofit:2.9.0
 |    |    \--- com.squareup.okhttp3:okhttp:3.14.9 -> 4.9.0
 |    |         +--- com.squareup.okio:okio:2.8.0
@@ -1983,7 +1946,7 @@ implementationDependenciesMetadata
 |    |    \--- org.jetbrains:annotations:13.0
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 +--- androidx.core:core-ktx:1.8.0
 |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    +--- androidx.core:core:1.8.0 -> 1.9.0
@@ -2288,7 +2251,7 @@ releaseCompileClasspath - Compile classpath for /release.
 |    |    \--- org.jetbrains:annotations:13.0
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0
 |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    +--- androidx.core:core:1.9.0
@@ -2506,7 +2469,7 @@ releaseCompileClasspath - Compile classpath for /release.
 +--- androidx.databinding:viewbinding:{strictly 8.0.2} -> 8.0.2 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.8.20} -> 1.8.20 (c)
-+--- circle.programmablewallet:sdk:{strictly 1.0.742} -> 1.0.742 (c)
++--- circle.programmablewallet:sdk:{strictly 1.0.718} -> 1.0.718 (c)
 +--- com.google.android.material:material:{strictly 1.5.0} -> 1.5.0 (c)
 +--- androidx.appcompat:appcompat:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
@@ -2601,7 +2564,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    \--- org.jetbrains:annotations:13.0
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 |    +--- com.squareup.retrofit2:retrofit:2.9.0
 |    |    \--- com.squareup.okhttp3:okhttp:3.14.9 -> 4.9.0
 |    |         +--- com.squareup.okio:okio:2.8.0
@@ -2956,7 +2919,7 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 |    |    \--- org.jetbrains:annotations:13.0
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 +--- androidx.core:core-ktx:1.8.0 -> 1.9.0
 |    +--- androidx.annotation:annotation:1.1.0 -> 1.3.0
 |    +--- androidx.core:core:1.9.0
@@ -3175,7 +3138,7 @@ releaseUnitTestCompileClasspath - Compile classpath for /releaseUnitTest.
 +--- androidx.databinding:viewbinding:{strictly 8.0.2} -> 8.0.2 (c)
 +--- androidx.annotation:annotation:{strictly 1.3.0} -> 1.3.0 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.8.20} -> 1.8.20 (c)
-+--- circle.programmablewallet:sdk:{strictly 1.0.742} -> 1.0.742 (c)
++--- circle.programmablewallet:sdk:{strictly 1.0.718} -> 1.0.718 (c)
 +--- com.google.android.material:material:{strictly 1.5.0} -> 1.5.0 (c)
 +--- androidx.appcompat:appcompat:{strictly 1.6.1} -> 1.6.1 (c)
 +--- androidx.core:core-ktx:{strictly 1.9.0} -> 1.9.0 (c)
@@ -3274,7 +3237,7 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    \--- org.jetbrains:annotations:13.0
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 (*)
-+--- circle.programmablewallet:sdk:1.0.+ -> 1.0.742
++--- circle.programmablewallet:sdk:1.0.+ -> 1.0.718
 |    +--- com.squareup.retrofit2:retrofit:2.9.0
 |    |    \--- com.squareup.okhttp3:okhttp:3.14.9 -> 4.9.0
 |    |         +--- com.squareup.okio:okio:2.8.0
@@ -3796,21 +3759,5 @@ No dependencies
 
 A web-based, searchable dependency report is available by adding the --scan option.
 
-> Task :app:compileDebugKotlin
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/CustomActivity.kt:20:37 Parameter 'v' is never used, could be renamed to _
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/CustomActivity.kt:32:15 'onBackPressed(): Unit' is deprecated. Overrides deprecated member in 'androidx.core.app.ComponentActivity'. Deprecated in Java
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/ui/main/MainFragment.kt:84:28 'getPackageInfo(String, Int): PackageInfo!' is deprecated. Deprecated in Java
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/util/KeyboardUtils.kt:28:31 Unnecessary safe call on a non-null receiver of type InputMethodManager
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/util/KeyboardUtils.kt:28:72 'SHOW_FORCED: Int' is deprecated. Deprecated in Java
-w: file:///github/workspace/app/src/main/java/com/circle/w3s/sample/wallet/util/KeyboardUtils.kt:35:31 Unnecessary safe call on a non-null receiver of type InputMethodManager
-
-> Task :app:compileDebugJavaWithJavac
-> Task :app:dexBuilderDebug
-> Task :app:mergeProjectDexDebug
-> Task :app:mergeDebugJavaResource
-> Task :app:packageDebug
-> Task :app:createDebugApkListingFileRedirect
-> Task :app:assembleDebug
-
-BUILD SUCCESSFUL in 1m 20s
-35 actionable tasks: 35 executed
+BUILD SUCCESSFUL in 655ms
+1 actionable task: 1 executed
