@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="false"
         android:taskAffinity=""
@@ -12,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.W3sSampleWallet"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -24,7 +26,20 @@
         </activity>
         <activity
             android:name=".CustomActivity"
+            android:theme="@style/Theme.AppCompat.Translucent.NoTitleBar"
+            android:taskAffinity=""
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".PerformLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ExecuteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:exported="false" />
     </application>
 
 </manifest>

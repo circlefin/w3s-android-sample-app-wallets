@@ -45,6 +45,14 @@
                 android:name="warningMessage"
                 app:argType="string"
                 app:nullable="true" />
+            <argument
+                android:name="signedTransaction"
+                app:argType="string"
+                app:nullable="true" />
+            <argument
+                android:name="txHash"
+                app:argType="string"
+                app:nullable="true" />
         </action>
     </fragment>
     <fragment
@@ -73,6 +81,14 @@
             app:nullable="true" />
         <argument
             android:name="signature"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="signedTransaction"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="txHash"
             app:argType="string"
             app:nullable="true" />
         <argument

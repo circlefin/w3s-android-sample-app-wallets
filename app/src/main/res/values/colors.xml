@@ -21,4 +21,20 @@
     <color name="disabled_input_background">#F5F5F5</color>
     <color name="input_boarder_focused">#46B5FF</color>
     <color name="input_boarder">#E8E8E8</color>
+    <color name="tab_background">#F5F5F8</color>
+    <color name="login_with_divider">#1A111827</color>
+    <color name="login_with_title">#8A849C</color>
+    <color name="login_with_btn_bg">#1d1b201f</color>
+    <color name="login_with_btn_text_enable">#000000</color>
+    <color name="login_with_btn_text_disable">#938F99</color>
+    <color name="login_with_btn_border">#CAC4D0</color>
+    <color name="alert_bg_positive">#008339</color>
+    <color name="alert_bg_negative">#FFEAEF</color>
+    <color name="alert_bg_negative_border">#4DBC0016</color>
+    <color name="alert_text_positive">#FFFFFF</color>
+    <color name="alert_text_negative">#BC0016</color>
+    <color name="text_prompt">#29233B</color>
+    <color name="text_title">#1d1b20</color>
+    <color name="btn_secondary_disable_bg">#F1F9FE</color>
+    <color name="alert_description_text">#49454F</color>
 </resources>

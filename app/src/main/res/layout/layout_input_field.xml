@@ -8,7 +8,7 @@
     tools:context=".ui.main.MainFragment"
     android:clickable="true"
     android:focusableInTouchMode="true">
-    <TextView
+    <com.circle.w3s.sample.wallet.ui.NecessaryTextView
         android:id="@+id/inputTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:textColor="@color/text_auxiliary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/input_layout_item_margin_top"
+        android:layout_marginTop="@dimen/input_layout_padding_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
         android:text="@string/label_endpoint"/>

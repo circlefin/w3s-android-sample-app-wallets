@@ -6,7 +6,10 @@
     <string name="label_user_token">User Token</string>
     <string name="label_encryption_key">Encryption Key</string>
     <string name="label_challenge_id">Challenge ID</string>
+    <string name="label_user_secret">User Secret</string>
     <string name="label_enable_biometrics">Biometrics</string>
+    <string name="label_disable_confirmation_ui">Disable Confirmation UI</string>
+    <string name="label_get_social_infos">Get Social Information</string>
     <string name="invalid_endpoint">Please input endpoint</string>
     <string name="invalid_app_id">Please input app ID</string>
     <string name="invalid_user_token">Please input user token</string>
@@ -14,7 +17,7 @@
     <string name="invalid_challenge_id">Please input challenge ID</string>
     <string name="action_execute">Execute</string>
     <string name="action_continue">Continue</string>
-    <string name="action_set_biometrics_pin">Set Biometrics Pin</string>
+    <string name="action_set_biometrics_pin">Set up Biometrics</string>
     <string name="label_challenge_type">Challenge Type</string>
     <string name="label_challenge_status">Challenge Status</string>
     <string name="label_error_code">Error Code</string>
@@ -22,4 +25,25 @@
     <string name="label_signature">Signature</string>
     <string name="label_warning_type">Warning Type</string>
     <string name="label_warning_message">Warning Message</string>
+    <string name="label_device_id">Device Id</string>
+    <string name="label_device_token">Device Token</string>
+    <string name="label_device_encryption_key">Device Encryption Key</string>
+    <string name="label_otp_token">OTP Token</string>
+
+    <string name="google_web_client_id" translatable="false">YOUR_GOOGLE_WEB_CLIENT_ID</string>
+    <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+    <string name="fb_login_protocol_scheme">your_fb_protocol_scheme</string>
+    <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+    <string name="main_title_new">User Controlled Wallet Sample App</string>
+    <string name="main_title2">Choose one Auth Method to start</string>
+    <string name="label_guide">Please configure OAuth credentials in the Console before testing the login flows. View docs for more guidance.</string>
+    <string name="label_doc">docs</string>
+
+    <string name="label_execute_challenge">Execute Challenge</string>
+    <string name="label_execute_challenge_sub">Enter Challenge ID to test wallet creation or signing flows.</string>
+    <string name="action_login_email">Log in with Email</string>
+    <string name="action_result_login_successful">Login Successful</string>
+    <string name="label_biometrics_setting">Enable Biometrics Setting</string>
+    <string name="label_sub_biometrics_setting">Please create PIN before setting up Biometrics</string>
+    <string name="register_callback">Register a callback function is required during the actual implementation.</string>
 </resources>

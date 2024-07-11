@@ -1,10 +1,12 @@
-// Copyright (c) 2023, Circle Technologies, LLC. All rights reserved.
+// Copyright (c) 2024, Circle Internet Financial, LTD. All rights reserved.
+//
+// SPDX-License-Identifier: Apache-2.0
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//   http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +22,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,13 +46,16 @@ import circle.programmablewallet.sdk.presentation.SettingsManagement
 import circle.programmablewallet.sdk.result.ExecuteResult
 import circle.programmablewallet.sdk.result.ExecuteResultType
 import com.circle.w3s.sample.wallet.CustomActivity
+import com.circle.w3s.sample.wallet.PerformLoginActivity
 import com.circle.w3s.sample.wallet.R
 import com.circle.w3s.sample.wallet.databinding.FragmentMainBinding
 import com.circle.w3s.sample.wallet.pwcustom.MyLayoutProvider
 import com.circle.w3s.sample.wallet.pwcustom.MyViewSetterProvider
 import com.circle.w3s.sample.wallet.util.KeyboardUtils
 import com.google.android.material.snackbar.Snackbar
+
 private val TAG = MainFragment::class.simpleName
+
 class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: FragmentMainBinding
@@ -91,13 +97,34 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         })
         binding.execute.setOnClickListener {
             initAndLaunchSdk {
-                WalletSdk.execute(
-                    activity,
-                    binding.userToken.inputValue.text.toString(),
-                    binding.encryptionKey.inputValue.text.toString(),
-                    arrayOf(binding.challengeId.inputValue.text.toString()),
-                    this
-                )
+                if (TextUtils.isEmpty(binding.userSecret.inputValue.text.toString())) {
+                    WalletSdk.execute(
+                        activity,
+                        binding.userToken.inputValue.text.toString(),
+                        binding.encryptionKey.inputValue.text.toString(),
+                        arrayOf(binding.challengeId.inputValue.text.toString()),
+                        this
+                    )
+                } else {
+                    //TODO
+//                    WalletSdk.executeWithUserSecret(
+//                        activity,
+//                        binding.userToken.inputValue.text.toString(),
+//                        binding.encryptionKey.inputValue.text.toString(),
+//                        binding.userSecret.inputValue.text.toString(),
+//                        arrayOf(binding.challengeId.inputValue.text.toString()),
+//                        this
+//                    )
+
+                    //FIXME temp test
+                    WalletSdk.execute(
+                        activity,
+                        binding.userToken.inputValue.text.toString(),
+                        binding.encryptionKey.inputValue.text.toString(),
+                        arrayOf(binding.challengeId.inputValue.text.toString()),
+                        this
+                    )
+                }
             }
         }
         viewModel.executeFormState.observe(viewLifecycleOwner, Observer {
@@ -129,17 +156,35 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
             }
         }
         binding.challengeId.inputTitle.setText(R.string.label_challenge_id)
-        binding.enableBiometrics.inputTitle.setText(R.string.label_enable_biometrics)
+        binding.userSecret.inputTitle.setText(R.string.label_user_secret)
         binding.endpoint.inputTitle.setText(R.string.label_endpoint)
         binding.appId.inputTitle.setText(R.string.label_app_id)
         binding.userToken.inputTitle.setText(R.string.label_user_token)
         binding.encryptionKey.inputTitle.setText(R.string.label_encryption_key)
+        binding.enableBiometrics.inputTitle.setText(R.string.label_enable_biometrics)
         binding.enableBiometrics.toggleBtn.isChecked = viewModel.enableBiometrics.value ?: true
         binding.enableBiometrics.toggleBtn.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setEnableBiometrics(
                 isChecked
             )
         }
+        binding.disableConfirmationUI.inputTitle.setText(R.string.label_disable_confirmation_ui)
+        binding.disableConfirmationUI.inputTitle.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_checkmark,0)
+        binding.disableConfirmationUI.toggleBtn.isChecked = viewModel.disableConfirmationUI.value ?: false
+        binding.disableConfirmationUI.toggleBtn.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setDisableConfirmationUI(
+                isChecked
+            )
+        }
+
+        binding.doSocial.setOnClickListener {
+            initAndLaunchSdk {
+                setInProgress(false)
+                goSocial(context, "Social token...") }
+        }
+
+        binding.endpoint.inputValue.setText(R.string.pw_endpoint)
+        binding.appId.inputValue.setText(R.string.pw_app_id)
 
         binding.endpoint.inputValue.doAfterTextChanged {
             executeDataChanged()
@@ -169,6 +214,10 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
             binding.appId.inputValue.text.toString(),
             binding.userToken.inputValue.text.toString(),
             binding.encryptionKey.inputValue.text.toString(),
+            null,
+            null,
+            null,
+            null,
             binding.challengeId.inputValue.text.toString(),
         )
     }
@@ -202,6 +251,7 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         try {
             val settingsManagement = SettingsManagement()
             settingsManagement.isEnableBiometricsPin = binding.enableBiometrics.toggleBtn.isChecked
+//            settingsManagement.disableConfirmationUI = binding.disableConfirmationUI.toggleBtn.isChecked
             WalletSdk.init(
                 requireContext().applicationContext,
                 WalletSdk.Configuration(
@@ -235,6 +285,8 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
             errorCode = errorCode,
             errorMessage = errorMessage,
             signature = result?.data?.signature,
+            signedTransaction = result?.data?.signedTransaction,
+            txHash = result?.data?.txHash,
             warningType = warning?.name,
             warningMessage = warning?.warningString
         )
@@ -269,6 +321,18 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         context.startActivity(intent)
     }
 
+    private fun goSocial(context: Context?, msg: String?) {
+        context ?: return
+        val b = Bundle()
+        b.putString(PerformLoginActivity.ARG_MSG, msg)
+        val intent = Intent(
+            context,
+            PerformLoginActivity::class.java
+        ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.putExtras(b)
+        context.startActivity(intent)
+    }
+
     override fun onEvent(event: ExecuteEvent) {
         goCustom(context, event.name)
     }
@@ -290,11 +354,6 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
                 return false // App won't handle next step, SDK will finish the Activity.
             }
 
-            ErrorCode.incorrectUserPin, ErrorCode.userPinLocked,
-            ErrorCode.incorrectSecurityAnswers, ErrorCode.securityAnswersLocked,
-            ErrorCode.insecurePinCode, ErrorCode.pinCodeNotMatched -> {
-            }
-
             else ->
                 goCustom(
                     context,
@@ -307,6 +366,9 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
     override fun onWarning(warning: ExecuteWarning, result: ExecuteResult?): Boolean {
         setInProgress(false)
         setDirection(warning = warning, result = result)
+        showSnack(
+            "${warning?.warningType}, ${warning?.warningString}, ${result?.resultType?.name}, ${result?.status?.name}, ${result?.data?.signature}"
+        )
         //return true, App will handle next step, SDK will keep the Activity.
         //return false, App won't handle next step, SDK will finish the Activity.
         return false
@@ -315,5 +377,6 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
     override fun onResult(result: ExecuteResult) {
         setInProgress(false)
         setDirection(result = result)
+        showSnack("${result.resultType?.name}, ${result.status?.name}, ${result.data?.signature}")
     }
 }
