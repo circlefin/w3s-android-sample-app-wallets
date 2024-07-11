@@ -37,6 +37,33 @@ pwsdk.maven.password=<GITHUB_PAT>
 
 <img src="readme_images/run_project.png" alt="drawing" width="600"/> 
  
- 5. Fill in the `App ID` and execute it along with `User Token`, `Encryption Key` and `Challenge ID`.    
+5. There are three tabs corresponding to different login methods. Fill in the `App ID` and fill in the relevant fields in each tab according to the requirements of different login methods for following execution action.
 
-<img src="readme_images/running_app.png" alt="drawing" width="300"/>
+
+<img src="readme_images/running_app_social.png" alt="drawing" width="200"/><img src="readme_images/running_app_email.png" alt="drawing" width="200"/><img src="readme_images/running_app_pin.png" alt="drawing" width="200"/>
+
+6. (Optional) SSO configs setup. If you want to use SSO for test , please follow below steps to and Social login infos.
+  - [Google and Facebook] Add/Edit value with a specific key-name in `strings.xml` (please refer to the sample strings.xml below)
+   
+  ```properties
+  <string name="google_web_client_id" translatable="false">YOUR_GOOGLE_WEB_CLIENT_ID</string>
+  
+  <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+  <string name="fb_login_protocol_scheme">your_fb_protocol_scheme</string>
+  <string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+
+  ```
+  - [Apple] Add your Apple `service-id` as manifestPlaceholders to app’s `build.gradle`
+  
+  ```properties
+  android {
+   
+  defaultConfig {
+       …
+       …
+       manifestPlaceholders = [appAuthRedirectScheme: 'YOUR_APPLE_SERVICE_ID']
+   }
+   }
+
+
+  ```
