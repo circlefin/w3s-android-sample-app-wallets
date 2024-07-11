@@ -1,0 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="NecessaryTextView">
+        <attr name="necessary" format="boolean"/>
+    </declare-styleable>
+</resources>
