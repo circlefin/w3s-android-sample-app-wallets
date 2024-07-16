@@ -16,74 +16,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:text="@string/label_execute_challenge"
+        android:textAlignment="center"
+        android:textColor="@color/text_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/close">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:text="@string/label_execute_challenge"
-            android:textAlignment="center"
-            android:textColor="@color/text_title"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/label_encryptionKey"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/label_encryption_key"
-            android:textAlignment="textStart"
-            android:textColor="@color/text_auxiliary"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-        <TextView
-            android:id="@+id/encryptionKey"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingVertical="9dp"
-            android:text="xxx"
-            android:textAlignment="textStart"
-            android:textColor="@color/text_main"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_encryptionKey" />
-
-        <include
-            android:id="@+id/user_token"
-            layout="@layout/layout_copy_field"
+        app:layout_constraintTop_toBottomOf="@id/close"/>
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/encryptionKey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:orientation="vertical">
 
-        <include
-            android:id="@+id/challengeId"
-            layout="@layout/layout_input_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_token" />
+            <TextView
+                android:id="@+id/label_encryptionKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_encryption_key"
+                android:textAlignment="textStart"
+                android:textColor="@color/text_auxiliary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/encryptionKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="9dp"
+                tools:text=""
+                android:textAlignment="textStart"
+                android:textColor="@color/text_main"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_encryptionKey" />
+
+            <include
+                android:id="@+id/user_token"
+                layout="@layout/layout_copy_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/encryptionKey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <include
+                android:id="@+id/challengeId"
+                layout="@layout/layout_input_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_token" />
+        </LinearLayout>
+    </ScrollView>
 
     <TextView
         android:id="@+id/btMain"

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">W3s Sample Wallet</string>
     <string name="main_title">Programmable Wallet SDK Sample App</string>
-    <string name="label_endpoint">Endpoint</string>
+    <string name="label_endpoint">End Point</string>
     <string name="label_app_id">APP ID</string>
     <string name="label_user_token">User Token</string>
     <string name="label_encryption_key">Encryption Key</string>
@@ -25,10 +25,11 @@
     <string name="label_signature">Signature</string>
     <string name="label_warning_type">Warning Type</string>
     <string name="label_warning_message">Warning Message</string>
-    <string name="label_device_id">Device Id</string>
+    <string name="label_device_id">Device ID</string>
     <string name="label_device_token">Device Token</string>
     <string name="label_device_encryption_key">Device Encryption Key</string>
     <string name="label_otp_token">OTP Token</string>
+    <string name="execute_successful">Execute Successful</string>
 
     <string name="google_web_client_id" translatable="false">YOUR_GOOGLE_WEB_CLIENT_ID</string>
     <string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>

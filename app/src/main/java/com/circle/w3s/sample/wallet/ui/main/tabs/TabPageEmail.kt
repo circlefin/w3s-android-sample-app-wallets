@@ -241,11 +241,11 @@ class TabPageEmail(activity: MainActivity) : ITabPage(activity), View.OnClickLis
         val b = Bundle()
         b.putString(
             ExecuteActivity.ARG_ENCRYPTION_KEY,
-            viewModel.executeFormState.value?.encryptionKey
+            viewModel.executeFormState.value?.emailEncryptionKey
         )
         b.putString(
             ExecuteActivity.ARG_USER_TOKEN,
-            viewModel.executeFormState.value?.userToken
+            viewModel.executeFormState.value?.emailUserToken
         )
         val intent = Intent(
             context,

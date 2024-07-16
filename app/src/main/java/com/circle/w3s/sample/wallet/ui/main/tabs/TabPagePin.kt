@@ -150,8 +150,7 @@ class TabPagePin(activity: MainActivity) : ITabPage(activity),
         binding.ll.requestFocus()
         try {
             val settingsManagement = SettingsManagement()
-            settingsManagement.isEnableBiometricsPin = true
-//                binding.enableBiometrics.toggleBtn.isChecked
+            settingsManagement.isEnableBiometricsPin = binding.enableBiometrics.toggleBtn.isChecked
             WalletSdk.init(
                 binding.main.context,
                 WalletSdk.Configuration(
@@ -255,7 +254,7 @@ class TabPagePin(activity: MainActivity) : ITabPage(activity),
         AlertBar.showAlert(
             binding.root,
             AlertBar.Type.ALERT_SUCCESS,
-            "${result.resultType?.name}, ${result.status?.name}, ${result.data?.signature}"
+            binding.root.context.getString(R.string.execute_successful)
         )
     }
 
