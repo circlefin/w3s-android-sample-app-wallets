@@ -96,10 +96,8 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
             if (!TextUtils.isEmpty(viewModel.executeFormState.value?.socialUserToken)
                 && !TextUtils.isEmpty(viewModel.executeFormState.value?.socialEncryptionKey)
             ) {
-                binding.tvSocialDes.visibility = View.GONE
                 binding.btnSocialExecute.visibility = View.VISIBLE
             } else {
-                binding.tvSocialDes.visibility = View.VISIBLE
                 binding.btnSocialExecute.visibility = View.GONE
             }
         })
@@ -166,11 +164,11 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
         val b = Bundle()
         b.putString(
             ExecuteActivity.ARG_ENCRYPTION_KEY,
-            viewModel.executeFormState.value?.encryptionKey
+            viewModel.executeFormState.value?.socialEncryptionKey
         )
         b.putString(
             ExecuteActivity.ARG_USER_TOKEN,
-            viewModel.executeFormState.value?.userToken
+            viewModel.executeFormState.value?.socialUserToken
         )
         val intent = Intent(
             context,
@@ -238,7 +236,6 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
             AlertBar.Type.ALERT_SUCCESS,
             binding.root.context.getString(R.string.action_result_login_successful)
         )
-
         val originUserToken = viewModel.executeFormState.value?.userToken
         val originEncryptionKey = viewModel.executeFormState.value?.encryptionKey
 

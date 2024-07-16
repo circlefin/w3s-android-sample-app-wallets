@@ -294,13 +294,13 @@ class PerformLoginActivity : AppCompatActivity(), View.OnClickListener, SocialCa
         Log.i(TAG, "APP onResult result.refreshToken = ${result.refreshToken}")
         Log.i(
             TAG,
-            "APP onResult result.oauthInfo?.ssoUserInfo?.email = ${result.oauthInfo?.ssoUserInfo?.email}"
+            "APP onResult result.oauthInfo?.ssoUserInfo?.email = ${result.oauthInfo?.socialUserInfo?.email}"
         )
 
         val resultMsg = "result.userToken = ${result.userToken} \n\n" +
                 "result.encryptionKey = ${result.encryptionKey} \n\n" +
                 "result.refreshToken = ${result.refreshToken} \n\n" +
-                "result.oauthInfo.ssoUserInfo.email = ${result.oauthInfo?.ssoUserInfo?.email}"
+                "result.oauthInfo.ssoUserInfo.email = ${result.oauthInfo?.socialUserInfo?.email}"
 
         binding.msg.text = resultMsg
     }

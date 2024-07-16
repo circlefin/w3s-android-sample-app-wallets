@@ -22,6 +22,7 @@
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="24dp"
             android:focusableInTouchMode="true"
             android:nestedScrollingEnabled="true"
             android:orientation="vertical">
@@ -173,20 +174,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_social_des"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="24dp"
-                    android:linksClickable="true"
-                    android:textColorLink="@color/blue_main"
-                    tools:text="@string/label_guide" />
-
                 <LinearLayout
                     android:id="@+id/btn_social_execute"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="16dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/background_rounded_social_execute_btn"
                     android:orientation="horizontal"
                     android:padding="16dp"
@@ -220,6 +212,16 @@
 
                     </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_social_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:linksClickable="true"
+                    android:textColorLink="@color/blue_main"
+                    tools:text="@string/label_guide" />
+
             </LinearLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>

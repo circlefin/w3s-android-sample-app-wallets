@@ -61,8 +61,8 @@ class ExecuteActivity : AppCompatActivity(), View.OnClickListener,
         binding.userToken.title.setText(R.string.label_user_token)
         binding.userToken.content.text = userToken
         binding.userToken.content.setOnClickListener(this)
-        binding.challengeId.inputTitle.setText(R.string.label_challenge_id)
         binding.challengeId.inputTitle.setNecessary(true)
+        binding.challengeId.inputTitle.setText(R.string.label_challenge_id)
         binding.challengeId.inputValue.doAfterTextChanged {
             if (!TextUtils.isEmpty(binding.challengeId.inputValue.text)) {
                 binding.btMain.isEnabled = true
@@ -170,7 +170,7 @@ class ExecuteActivity : AppCompatActivity(), View.OnClickListener,
         AlertBar.showAlert(
             binding.root,
             AlertBar.Type.ALERT_SUCCESS,
-            "${result.resultType?.name}, ${result.status?.name}, ${result.data?.signature}"
+            getString(R.string.execute_successful)
         )
     }
 }
