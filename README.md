@@ -42,7 +42,7 @@ pwsdk.maven.password=<GITHUB_PAT>
 
 <img src="readme_images/running_app_social.png" alt="drawing" width="200"/><img src="readme_images/running_app_email.png" alt="drawing" width="200"/><img src="readme_images/running_app_pin.png" alt="drawing" width="200"/>
 
-6. (Optional) SSO configs setup. If you want to use SSO for test , please follow below steps to and Social login infos.
+6. (Optional) Auth configs setup. If you want to use social login for test , please follow below steps to and Social login infos.
   - [Google and Facebook] Add/Edit value with a specific key-name in `strings.xml` (please refer to the sample strings.xml below)
    
   ```properties
