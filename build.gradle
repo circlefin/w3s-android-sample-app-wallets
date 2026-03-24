@@ -17,6 +17,9 @@ buildscript {
             
             // Force upgrade jdom2 to fix #36
             force 'org.jdom:jdom2:2.0.6.1'
+
+            // Force upgrade jose4j to fix #40 (VULN-7340, CVE-2024-29371)
+            force 'org.bitbucket.b_c:jose4j:0.9.6'
         }
     }
     dependencies {
