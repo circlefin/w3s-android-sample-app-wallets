@@ -21,7 +21,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import circle.programmablewallet.sdk.WalletSdk
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CustomActivity: AppCompatActivity() {
     companion object {
         const val ARG_MSG = "msg"

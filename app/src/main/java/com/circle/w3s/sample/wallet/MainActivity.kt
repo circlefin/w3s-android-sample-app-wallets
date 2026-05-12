@@ -17,46 +17,67 @@
 package com.circle.w3s.sample.wallet
 
 import android.os.Bundle
-import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import circle.programmablewallet.sdk.presentation.SecurityQuestion
 import com.circle.w3s.sample.wallet.databinding.ActivityMainBinding
+import com.circle.w3s.sample.wallet.pwcustom.MyLayoutProvider
+import com.circle.w3s.sample.wallet.pwcustom.MyViewSetterProvider
 import com.circle.w3s.sample.wallet.ui.main.MainViewModel
 import com.circle.w3s.sample.wallet.ui.main.tabs.TabPagerAdapter
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
-        val view: View = binding.getRoot()
-        setContentView(view)
+        setContentView(binding.root)
 
-        val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         val endPoint = getString(R.string.pw_endpoint)
         val appId = getString(R.string.pw_app_id)
         viewModel.executeDataChanged(endPoint, appId, null, null, null, null, null, null, null)
 
-        val tabs: TabLayout = binding.tabs
+        setupSdk()
 
-        val viewpager: ViewPager = binding.viewpager
-        viewpager.adapter = TabPagerAdapter(this)
-        viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
-        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewpager))
-        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                viewpager.currentItem = tab.position
-            }
+        val viewPager: ViewPager2 = binding.viewpager
+        viewPager.adapter = TabPagerAdapter(this)
+        // Keep all tabs' views resident so transient view state (focus, internal scroll) is
+        // preserved on revisit. The default offscreenPageLimit destroys views on off-screen
+        // pages, which still preserves ViewModel-backed state but loses local UI state.
+        viewPager.offscreenPageLimit = TabPagerAdapter.OFFSCREEN_PAGE_LIMIT_FOR_FULL_RESIDENCY
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-        })
+        TabLayoutMediator(binding.tabs, viewPager) { tab, position ->
+            tab.text = TabPagerAdapter.TAB_TITLES[position]
+        }.attach()
     }
+
+    private fun setupSdk() {
+        // Runs once per onCreate. The PW SDK setters delegate to a process-wide singleton, so
+        // re-invocation across re-creations is idempotent. Providers are handed the
+        // applicationContext (not `this`) because the SDK retains them for the lifetime of the
+        // process — passing the Activity would leak it across config changes.
+        viewModel.setLayoutProvider(MyLayoutProvider(applicationContext))
+        viewModel.setViewSetterProvider(MyViewSetterProvider(applicationContext))
+        viewModel.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
+        viewModel.setSecurityQuestions(
+            arrayOf(
+                SecurityQuestion("What is your father’s middle name?"),
+                SecurityQuestion("What is your favorite sports team?"),
+                SecurityQuestion("What is your mother’s maiden name?"),
+                SecurityQuestion("What is the name of your first pet?"),
+                SecurityQuestion("What is the name of the city you were born in?"),
+                SecurityQuestion("What is the name of the first street you lived on?"),
+                SecurityQuestion(
+                    "When is your father’s birthday?",
+                    SecurityQuestion.InputType.datePicker
+                )
+            )
+        )
+    }
+
 }

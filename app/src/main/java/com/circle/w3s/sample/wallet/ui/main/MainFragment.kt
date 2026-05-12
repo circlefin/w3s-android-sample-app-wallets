@@ -22,7 +22,6 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,16 +30,12 @@ import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import circle.programmablewallet.sdk.WalletSdk
-import circle.programmablewallet.sdk.api.ApiError
-import circle.programmablewallet.sdk.api.ApiError.ErrorCode
-import circle.programmablewallet.sdk.api.Callback
-import circle.programmablewallet.sdk.api.ExecuteEvent
 import circle.programmablewallet.sdk.api.ExecuteWarning
-import circle.programmablewallet.sdk.presentation.EventListener
 import circle.programmablewallet.sdk.presentation.SecurityQuestion
 import circle.programmablewallet.sdk.presentation.SettingsManagement
 import circle.programmablewallet.sdk.result.ExecuteResult
@@ -53,10 +48,13 @@ import com.circle.w3s.sample.wallet.pwcustom.MyLayoutProvider
 import com.circle.w3s.sample.wallet.pwcustom.MyViewSetterProvider
 import com.circle.w3s.sample.wallet.util.KeyboardUtils
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 private val TAG = MainFragment::class.simpleName
 
-class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
+@AndroidEntryPoint
+class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var binding: FragmentMainBinding
 
@@ -72,6 +70,41 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         super.onViewCreated(view, savedInstanceState)
         init()
         setupSdk()
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.executeState.collect { state ->
+                        handleExecuteState(state) { viewModel.resetExecuteState() }
+                    }
+                }
+                launch {
+                    viewModel.setBiometricsPinState.collect { state ->
+                        handleExecuteState(state) { viewModel.resetSetBiometricsPinState() }
+                    }
+                }
+                launch {
+                    viewModel.eventFlow.collect { event -> goCustom(context, event.name) }
+                }
+                launch {
+                    viewModel.naviDirections.collect { directions ->
+                        directions ?: return@collect
+                        findNavController().navigate(directions)
+                        viewModel.setNaviDirections(null)
+                    }
+                }
+                launch {
+                    viewModel.executeFormState.collect { state ->
+                        state ?: return@collect
+                        binding.execute.isEnabled = state.isExecuteDataValid
+                    }
+                }
+                launch {
+                    viewModel.isSetBiometricsPinDataValid.collect { valid ->
+                        binding.setBiometricsPin.isEnabled = valid
+                    }
+                }
+            }
+        }
     }
 
     private fun getVersionName(context: Context): String {
@@ -90,52 +123,16 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
             val versionName = getVersionName(it)
             binding.version.text = versionName
         }
-        viewModel.naviDirections.observe(viewLifecycleOwner, Observer {
-            it ?: return@Observer
-            findNavController().navigate(it)
-            viewModel.setNaviDirections(null)
-        })
         binding.execute.setOnClickListener {
             initAndLaunchSdk {
-                if (TextUtils.isEmpty(binding.userSecret.inputValue.text.toString())) {
-                    WalletSdk.execute(
-                        activity,
-                        binding.userToken.inputValue.text.toString(),
-                        binding.encryptionKey.inputValue.text.toString(),
-                        arrayOf(binding.challengeId.inputValue.text.toString()),
-                        this
-                    )
-                } else {
-                    //TODO
-//                    WalletSdk.executeWithUserSecret(
-//                        activity,
-//                        binding.userToken.inputValue.text.toString(),
-//                        binding.encryptionKey.inputValue.text.toString(),
-//                        binding.userSecret.inputValue.text.toString(),
-//                        arrayOf(binding.challengeId.inputValue.text.toString()),
-//                        this
-//                    )
-
-                    //FIXME temp test
-                    WalletSdk.execute(
-                        activity,
-                        binding.userToken.inputValue.text.toString(),
-                        binding.encryptionKey.inputValue.text.toString(),
-                        arrayOf(binding.challengeId.inputValue.text.toString()),
-                        this
-                    )
-                }
+                viewModel.executeSdk(
+                    requireActivity(),
+                    binding.userToken.inputValue.text.toString(),
+                    binding.encryptionKey.inputValue.text.toString(),
+                    binding.challengeId.inputValue.text.toString(),
+                )
             }
         }
-        viewModel.executeFormState.observe(viewLifecycleOwner, Observer {
-            it ?: return@Observer
-            binding.execute.isEnabled = it.isExecuteDataValid
-        })
-        viewModel.isSetBiometricsPinDataValid.observe(viewLifecycleOwner, Observer {
-            it ?: return@Observer
-            binding.setBiometricsPin.isEnabled = it
-        })
-
         binding.endpoint.inputValue.setText(R.string.pw_endpoint)
         binding.appId.inputValue.setText(R.string.pw_app_id)
         viewModel.executeFormState.value?.let {
@@ -147,11 +144,10 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         }
         binding.setBiometricsPin.setOnClickListener {
             initAndLaunchSdk {
-                WalletSdk.setBiometricsPin(
-                    activity,
+                viewModel.setBiometricsPin(
+                    requireActivity(),
                     binding.userToken.inputValue.text.toString(),
                     binding.encryptionKey.inputValue.text.toString(),
-                    this
                 )
             }
         }
@@ -162,7 +158,7 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         binding.userToken.inputTitle.setText(R.string.label_user_token)
         binding.encryptionKey.inputTitle.setText(R.string.label_encryption_key)
         binding.enableBiometrics.inputTitle.setText(R.string.label_enable_biometrics)
-        binding.enableBiometrics.toggleBtn.isChecked = viewModel.enableBiometrics.value ?: true
+        binding.enableBiometrics.toggleBtn.isChecked = viewModel.enableBiometrics.value
         binding.enableBiometrics.toggleBtn.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setEnableBiometrics(
                 isChecked
@@ -170,7 +166,7 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         }
         binding.disableConfirmationUI.inputTitle.setText(R.string.label_disable_confirmation_ui)
         binding.disableConfirmationUI.inputTitle.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_checkmark,0)
-        binding.disableConfirmationUI.toggleBtn.isChecked = viewModel.disableConfirmationUI.value ?: false
+        binding.disableConfirmationUI.toggleBtn.isChecked = viewModel.disableConfirmationUI.value
         binding.disableConfirmationUI.toggleBtn.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setDisableConfirmationUI(
                 isChecked
@@ -223,13 +219,12 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
     }
 
     private fun setupSdk() {
-        WalletSdk.addEventListener(this)
         context?.let {
-            WalletSdk.setLayoutProvider(MyLayoutProvider(it))
-            WalletSdk.setViewSetterProvider(MyViewSetterProvider(it))
-            WalletSdk.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
+            viewModel.setLayoutProvider(MyLayoutProvider(it))
+            viewModel.setViewSetterProvider(MyViewSetterProvider(it))
+            viewModel.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
         }
-        WalletSdk.setSecurityQuestions(
+        viewModel.setSecurityQuestions(
             arrayOf(
                 SecurityQuestion("What is your father’s middle name?"),
                 SecurityQuestion("What is your favorite sports team?"),
@@ -245,22 +240,21 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         )
     }
 
-    private inline fun initAndLaunchSdk(launchBlock: () -> Unit) {
+    private fun initAndLaunchSdk(launchBlock: () -> Unit) {
         KeyboardUtils.hideKeyboard(binding.challengeId.inputValue)
         binding.ll.requestFocus()
         try {
             val settingsManagement = SettingsManagement()
             settingsManagement.isEnableBiometricsPin = binding.enableBiometrics.toggleBtn.isChecked
 //            settingsManagement.disableConfirmationUI = binding.disableConfirmationUI.toggleBtn.isChecked
-            WalletSdk.init(
+            viewModel.initSdk(
                 requireContext().applicationContext,
-                WalletSdk.Configuration(
-                    binding.endpoint.inputValue.text.toString(),
-                    binding.appId.inputValue.text.toString(),
-                    settingsManagement
-                )
+                binding.endpoint.inputValue.text.toString(),
+                binding.appId.inputValue.text.toString(),
+                settingsManagement,
             )
         } catch (t: Throwable) {
+            Log.e(TAG, "initSdk failed", t)
             showSnack(t.message ?: "initSdk catch null")
             return
         }
@@ -333,50 +327,47 @@ class MainFragment : Fragment(), EventListener, Callback<ExecuteResult> {
         context.startActivity(intent)
     }
 
-    override fun onEvent(event: ExecuteEvent) {
-        goCustom(context, event.name)
-    }
-
-    override fun onError(error: Throwable): Boolean {
-        setInProgress(false)
-        error.printStackTrace()
-        if (error !is ApiError) {
-            setDirection(errorMessage = error.message ?: "onError null")
-            return false // App won't handle next step, SDK will finish the Activity.
-        }
-        when (error.code) {
-            ErrorCode.userCanceled,
-            ErrorCode.networkError -> {
-                setDirection(
-                    errorCode = error.code.value.toString(),
-                    errorMessage = error.message
+    private inline fun handleExecuteState(state: ExecuteUiState, onTerminal: () -> Unit) {
+        // `when` used as expression so a future ExecuteDirections variant becomes a hard
+        // compile error instead of a silent no-op (Kotlin only enforces exhaustiveness on
+        // value-returning `when`s without `allWarningsAsErrors`). The `@Suppress` silences
+        // the otherwise-unavoidable `UNUSED_VARIABLE` warning this idiom produces.
+        @Suppress("UNUSED_VARIABLE")
+        val exhaustiveWhen: Unit = when (val d = viewModel.computeExecuteDirections(state)) {
+            is ExecuteDirections.None -> Unit
+            is ExecuteDirections.ShowLoading -> setInProgress(true)
+            is ExecuteDirections.NavigateSuccess -> {
+                setInProgress(false)
+                setDirection(result = d.result)
+                showSnack(
+                    "${d.result.resultType?.name}, ${d.result.status?.name}, ${d.result.data?.signature}"
                 )
-                return false // App won't handle next step, SDK will finish the Activity.
+                onTerminal()
             }
-
-            else ->
-                goCustom(
-                    context,
-                    error.message
+            is ExecuteDirections.NavigateWarning -> {
+                setInProgress(false)
+                setDirection(warning = d.warning, result = d.result)
+                showSnack(
+                    "${d.warning.warningType}, ${d.warning.warningString}, " +
+                        "${d.result?.resultType?.name}, ${d.result?.status?.name}, ${d.result?.data?.signature}"
                 )
+                onTerminal()
+            }
+            is ExecuteDirections.NavigateTransientError -> {
+                setInProgress(false)
+                setDirection(errorCode = d.code, errorMessage = d.message)
+                onTerminal()
+            }
+            is ExecuteDirections.GoCustom -> {
+                setInProgress(false)
+                goCustom(context, d.message)
+                onTerminal()
+            }
+            is ExecuteDirections.NavigateGenericError -> {
+                setInProgress(false)
+                setDirection(errorMessage = d.message)
+                onTerminal()
+            }
         }
-        return true // App will handle next step, SDK will keep the Activity.
-    }
-
-    override fun onWarning(warning: ExecuteWarning, result: ExecuteResult?): Boolean {
-        setInProgress(false)
-        setDirection(warning = warning, result = result)
-        showSnack(
-            "${warning?.warningType}, ${warning?.warningString}, ${result?.resultType?.name}, ${result?.status?.name}, ${result?.data?.signature}"
-        )
-        //return true, App will handle next step, SDK will keep the Activity.
-        //return false, App won't handle next step, SDK will finish the Activity.
-        return false
-    }
-
-    override fun onResult(result: ExecuteResult) {
-        setInProgress(false)
-        setDirection(result = result)
-        showSnack("${result.resultType?.name}, ${result.status?.name}, ${result.data?.signature}")
     }
 }

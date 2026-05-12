@@ -26,22 +26,25 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import circle.programmablewallet.sdk.WalletSdk
-import circle.programmablewallet.sdk.api.ApiError
-import circle.programmablewallet.sdk.api.Callback2
-import circle.programmablewallet.sdk.api.LogoutCallback
-import circle.programmablewallet.sdk.api.SocialCallback
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import circle.programmablewallet.sdk.api.SocialProvider
-import circle.programmablewallet.sdk.result.LoginResult
 import com.circle.w3s.sample.wallet.databinding.ActivitySocialBinding
-import com.circle.w3s.sample.wallet.ui.main.MainViewModel
+import com.circle.w3s.sample.wallet.ui.AuthErrorClassification
+import com.circle.w3s.sample.wallet.ui.PerformLoginViewModel
+import com.circle.w3s.sample.wallet.ui.main.LoginUiState
+import com.circle.w3s.sample.wallet.ui.main.LogoutUiState
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
-class PerformLoginActivity : AppCompatActivity(), View.OnClickListener, SocialCallback<LoginResult> , LogoutCallback{
+@AndroidEntryPoint
+class PerformLoginActivity : AppCompatActivity(), View.OnClickListener {
     private val TAG: String = "APP.PerformLoginActivity"
     private val RC_SIGN_IN: Int = 111111
     private lateinit var googleSignInButton: TextView
@@ -51,7 +54,7 @@ class PerformLoginActivity : AppCompatActivity(), View.OnClickListener, SocialCa
     private lateinit var contentDeviceId: TextView
 
     private lateinit var binding: ActivitySocialBinding
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: PerformLoginViewModel by viewModels()
 
 
     companion object {
@@ -99,10 +102,28 @@ class PerformLoginActivity : AppCompatActivity(), View.OnClickListener, SocialCa
 
         binding.verifyOtpButton.setOnClickListener(this)
 
-        val deviceId = WalletSdk.getDeviceId(applicationContext)
+        val deviceId = viewModel.getDeviceId(applicationContext)
         contentDeviceId = findViewById(R.id.content_device_id)
         contentDeviceId.text = deviceId
         contentDeviceId.setOnClickListener(this)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.loginState.collect { state ->
+                        handleLoginState(state) { viewModel.resetLoginState() }
+                    }
+                }
+                launch {
+                    viewModel.logoutState.collect { state -> handleLogoutState(state) }
+                }
+                launch {
+                    viewModel.verifyOtpState.collect { state ->
+                        handleLoginState(state) { viewModel.resetVerifyOtpState() }
+                    }
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
@@ -114,7 +135,7 @@ class PerformLoginActivity : AppCompatActivity(), View.OnClickListener, SocialCa
      * Bring SDK UI to the front and finish the Activity.
      */
     private fun goBackToSdkUi() {
-        WalletSdk.moveTaskToFront(this)
+        viewModel.moveTaskToFront(this)
         finish()
     }
 
@@ -150,96 +171,64 @@ class PerformLoginActivity : AppCompatActivity(), View.OnClickListener, SocialCa
 
     private fun signInGoogle() {
         binding.msg.text = "Login Google"
-        WalletSdk.performLogin(
+        viewModel.login(
             this,
             SocialProvider.Google,
             binding.deviceToken.inputValue.text.toString(),
-            binding.deviceEncryptionKey.inputValue.text.toString(),
-            this
+            binding.deviceEncryptionKey.inputValue.text.toString()
         )
     }
 
     private fun logoutGoogle() {
         binding.msg.text = "Logout Google"
-        WalletSdk.performLogout(
+        viewModel.logout(
             this,
-            SocialProvider.Google,
-            this
+            SocialProvider.Google
         )
     }
 
     private fun signInFacebook() {
         binding.msg.text = "Login Facebook"
-        WalletSdk.performLogin(
+        viewModel.login(
             this,
             SocialProvider.Facebook,
             binding.deviceToken.inputValue.text.toString(),
-            binding.deviceEncryptionKey.inputValue.text.toString(),
-            this
+            binding.deviceEncryptionKey.inputValue.text.toString()
         )
     }
 
     private fun logoutFacebook() {
         binding.msg.text = "Logout Facebook"
-        WalletSdk.performLogout(
+        viewModel.logout(
             this,
-            SocialProvider.Facebook,
-            this
+            SocialProvider.Facebook
         )
     }
 
     private fun signInApple() {
         binding.msg.text = "Login Apple"
-        WalletSdk.performLogin(
+        viewModel.login(
             this,
             SocialProvider.Apple,
             binding.deviceToken.inputValue.text.toString(),
-            binding.deviceEncryptionKey.inputValue.text.toString(),
-            this
+            binding.deviceEncryptionKey.inputValue.text.toString()
         )
     }
 
     private fun logoutApple() {
         binding.msg.text = "Logout Apple"
-        WalletSdk.performLogout(
+        viewModel.logout(
             this,
-            SocialProvider.Apple,
-            this
+            SocialProvider.Apple
         )
     }
 
     private fun verifyOtp() {
-        WalletSdk.verifyOTP(
+        viewModel.verifyOtp(
             this,
             binding.otpToken.inputValue.text.toString(),
             binding.deviceToken.inputValue.text.toString(),
-            binding.deviceEncryptionKey.inputValue.text.toString(),
-            object : Callback2<LoginResult> {
-                override fun onError(error: Throwable): Boolean {
-                    Log.i(TAG, "APP onError - $error")
-                    error.printStackTrace()
-                    if (error !is ApiError) {
-                        return false // App won't handle next step, SDK will finish the Activity.
-                    }
-                    when (error.code) {
-                        ApiError.ErrorCode.userCanceled,
-                        ApiError.ErrorCode.networkError -> {
-                            return false // App won't handle next step, SDK will finish the Activity.
-                        }
-
-                        else ->
-                            goCustom(
-                                this@PerformLoginActivity.applicationContext,
-                                error.message
-                            )
-                    }
-                    return false
-                }
-
-                override fun onResult(result: LoginResult) {
-                    this@PerformLoginActivity.onResult(result)
-                }
-            }
+            binding.deviceEncryptionKey.inputValue.text.toString()
         )
     }
 
@@ -273,36 +262,71 @@ class PerformLoginActivity : AppCompatActivity(), View.OnClickListener, SocialCa
         }
     }
 
-    override fun onComplete() {
-        binding.msg.text = "Logout complete"
-    }
+    private inline fun handleLoginState(state: LoginUiState, onTerminal: () -> Unit) {
+        when (state) {
+            is LoginUiState.Idle -> Unit
+            // No loading UI for this screen
+            is LoginUiState.Loading -> Unit
+            is LoginUiState.Success -> {
+                Log.i(TAG, "APP onResult result.userToken = [REDACTED]")
+                Log.i(TAG, "APP onResult result.encryptionKey = [REDACTED]")
+                Log.i(TAG, "APP onResult result.refreshToken = [REDACTED]")
+                // Email is PII; redact to match token treatment above.
+                Log.i(TAG, "APP onResult result.oauthInfo?.socialUserInfo?.email = [REDACTED]")
 
-    override fun onError(error: Throwable) {
-        Log.i(TAG, "APP onError - $error")
-        error.printStackTrace()
-        if (error is ApiError && (error.code != ApiError.ErrorCode.userCanceled && error.code != ApiError.ErrorCode.networkError)) {
-            goCustom(
-                this.applicationContext,
-                error.message
-            )
+                val resultMsg = "result.userToken = [REDACTED]\n\n" +
+                        "result.encryptionKey = [REDACTED]\n\n" +
+                        "result.refreshToken = [REDACTED]\n\n" +
+                        "result.oauthInfo.socialUserInfo.email = [REDACTED]"
+
+                binding.msg.text = resultMsg
+                onTerminal()
+            }
+            is LoginUiState.Error -> {
+                Log.e(TAG, "login failed", state.throwable)
+                routeLoginOrLogoutError(state.throwable)
+                onTerminal()
+            }
         }
     }
 
-    override fun onResult(result: LoginResult) {
-        Log.i(TAG, "APP onResult result.userToken = ${result.userToken}")
-        Log.i(TAG, "APP onResult result.encryptionKey = ${result.encryptionKey}")
-        Log.i(TAG, "APP onResult result.refreshToken = ${result.refreshToken}")
-        Log.i(
-            TAG,
-            "APP onResult result.oauthInfo?.ssoUserInfo?.email = ${result.oauthInfo?.socialUserInfo?.email}"
-        )
+    private fun handleLogoutState(state: LogoutUiState) {
+        when (state) {
+            is LogoutUiState.Idle -> Unit
+            // No loading UI for this screen
+            is LogoutUiState.Loading -> Unit
+            is LogoutUiState.Success -> {
+                binding.msg.text = "Logout complete"
+                viewModel.resetLogoutState()
+            }
+            is LogoutUiState.Error -> {
+                Log.e(TAG, "logout failed", state.throwable)
+                routeLoginOrLogoutError(state.throwable)
+                viewModel.resetLogoutState()
+            }
+        }
+    }
 
-        val resultMsg = "result.userToken = ${result.userToken} \n\n" +
-                "result.encryptionKey = ${result.encryptionKey} \n\n" +
-                "result.refreshToken = ${result.refreshToken} \n\n" +
-                "result.oauthInfo.ssoUserInfo.email = ${result.oauthInfo?.socialUserInfo?.email}"
-
-        binding.msg.text = resultMsg
+    /**
+     * Shared error-dispatch for the Login and Logout Error branches. Uses the VM's pure
+     * [PerformLoginViewModel.classifyAuthError] so this Activity never introspects error
+     * types directly.
+     *
+     * Variant mapping preserves master's behavior: non-transient ApiError routes to a
+     * standalone CustomActivity; Transient (userCanceled / networkError) and Unknown
+     * (non-ApiError) are silent.
+     */
+    private fun routeLoginOrLogoutError(error: Throwable) {
+        // `when` used as expression so a future AuthErrorClassification variant becomes a
+        // hard compile error instead of a silent no-op — same idiom as
+        // MainFragment.handleExecuteState / ExecuteActivity.handleExecuteState. The
+        // `@Suppress` silences the otherwise-unavoidable `UNUSED_VARIABLE` warning.
+        @Suppress("UNUSED_VARIABLE")
+        val exhaustiveWhen: Unit = when (val c = viewModel.classifyAuthError(error)) {
+            is AuthErrorClassification.Other -> goCustom(this.applicationContext, c.message)
+            is AuthErrorClassification.Transient -> Unit
+            is AuthErrorClassification.Unknown -> Unit
+        }
     }
 
     private fun goCustom(context: Context?, msg: String?) {

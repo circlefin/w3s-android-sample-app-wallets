@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.gms.google-services'
+    id 'com.google.devtools.ksp'
+    id 'com.google.dagger.hilt.android'
+    id 'jacoco'
 }
 
 android {
@@ -40,6 +43,171 @@ android {
     buildFeatures {
         viewBinding true
     }
+    // Return defaults for android.util.Log.* calls in unit tests. WalletRepositoryImpl
+    // emits Log.d breadcrumbs from callbackFlow's awaitClose and Log.w from its
+    // emitOrLog helper; without this, those Log.* calls throw "Method X not mocked"
+    // under the plain JUnit4 runner. Trade-off noted in PR #673 review (Copilot):
+    // this can also silence unrelated framework calls that default-return. Tests
+    // here don't rely on framework defaults — they exercise Flow emission and
+    // captured callbacks. If coverage grows into framework territory, swap for
+    // Robolectric per the spec's decision tree.
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+jacoco {
+    toolVersion = '0.8.11'
+}
+
+// Single source of truth for JaCoCo exclusions. Shared by both `jacocoTestReport`
+// (report denominator) and `jacocoCoverageVerification` (80% gate denominator) so a
+// one-sided edit cannot make the two tasks compute different coverage numbers.
+//
+// Ant-style globs matched against .class file paths under `build/tmp/kotlin-classes/debug/…`.
+// Paths mirror package structure (e.g. `com/circle/.../FooActivity.class`), so
+// `**/databinding/**` matches a package and `**/*Activity*.*` matches classnames.
+//
+// Re-validate if UI classes reappear in the report after a Kotlin/AGP toolchain bump —
+// synthetic inner-class naming can change.
+project.ext.coverageExclusions = [
+    // Android boilerplate
+    '**/R.class', '**/R$*.class', '**/BuildConfig.*',
+    // Hilt-generated. Covers Kotlin-compile output (KSP) AND Java-compile output
+    // (Hilt JavaPoet codegen under intermediates/javac/…). The union of both output
+    // directories below means we need exclusions that match either shape.
+    '**/*_Hilt*.*', '**/Hilt_*.*', '**/*_Factory*.*',
+    '**/*_GeneratedInjector*.*', '**/*_MembersInjector.*',
+    '**/*_HiltModules*.*',
+    // Dagger @Provides factories: `<Module>_Provide<Method>Factory` — the
+    // `_Provide…Factory` segment isn't adjacent to `_Factory`, so the generic
+    // `**/*_Factory*.*` above doesn't match these.
+    '**/*_Provide*Factory*.*',
+    // Hilt aggregator wrappers around @InstallIn modules.
+    '**/HiltWrapper_*.*',
+    // Hilt/Dagger internal aggregated-root codegen.
+    '**/dagger/hilt/internal/**',
+    // Databinding-generated
+    '**/databinding/**',
+    // Safe-Args navigation-generated. Scoped to **/ui/** so a hand-written value object
+    // named *Args anywhere else isn't silently excluded.
+    '**/ui/**/*Args.*', '**/ui/**/*Args$*.*',
+    // Safe-Args generates <Fragment>Directions / <Activity>Directions classes; narrowed
+    // from the original **/*Directions.* which accidentally matched hand-written sealed
+    // types like ExecuteDirections (addressed in PR-C review).
+    '**/ui/**/*FragmentDirections.*', '**/ui/**/*FragmentDirections$*.*',
+    '**/ui/**/*ActivityDirections.*', '**/ui/**/*ActivityDirections$*.*',
+    // UI shell — excluded by design. Decision logic lives in VM pure functions
+    // (computeExecuteDirections / classifyAuthError). Globs are scoped to the actual UI
+    // packages so a future non-UI helper whose name happens to contain "Activity" or
+    // "Fragment" (e.g. ActivityLogger, FragmentCacheKey) won't be silently excluded.
+    // `*` wildcards on both sides still catch generated inner classes ($init$inlined$…,
+    // $onCreate$inlined$…) that *Activity. / *Fragment. alone would miss.
+    '**/com/circle/w3s/sample/wallet/*Activity*.*',
+    '**/com/circle/w3s/sample/wallet/W3sSampleWalletApp.*',
+    '**/com/circle/w3s/sample/wallet/ui/**/*Fragment*.*',
+    '**/ui/main/tabs/TabPage*.*', '**/ui/main/tabs/TabPage*$*.*',
+    '**/ui/main/tabs/TabPagerAdapter.*', '**/ui/main/tabs/TabPagerAdapter$*.*',
+    // UI support (layout / view / alert / keyboard / custom views) — depend on
+    // Android framework, not unit-testable without Robolectric (out of scope).
+    '**/pwcustom/**',
+    '**/ui/alert/**',
+    '**/ui/NecessaryTextView*.*',
+    '**/util/KeyboardUtils*.*',
+    // Thin real-SDK wrapper: every method is a 1-line pass-through to the Circle
+    // SDK's WalletSdk object. Unit-testable only via Robolectric (SDK touches Android
+    // framework). The WalletSdkGateway *interface* it implements is exhaustively
+    // exercised via FakeWalletSdkGateway in unit tests.
+    // Narrow match: only the exact class + its inner classes ($). A wider
+    // `DefaultWalletSdkGateway*.*` would have swallowed any future sibling like
+    // DefaultWalletSdkGatewayV2 / Wrapper / Decorator silently.
+    '**/data/DefaultWalletSdkGateway.*', '**/data/DefaultWalletSdkGateway$*.*',
+]
+
+// Source-set coverage: `classDirectories` below unions the Kotlin compile
+// `build/tmp/kotlin-classes/debug/...`. Paths mirror package structure
+// (e.g., `com/circle/.../FooActivity.class`), so `**/databinding/**` matches
+// the package; `**/*Activity*.*` matches classnames.
+//
+// Re-validate these globs if UI classes reappear in the report after any
+// Kotlin/AGP toolchain bump (synthetic inner-class naming can change).
+//
+// Source-set coverage: `classDirectories` below unions the Kotlin compile
+// output AND the Java compile output, so coverage stays accurate even if
+// Java production sources are later added under `src/main/java`. If either
+// directory is empty (no sources of that kind), fileTree silently enumerates
+// zero classes — no-op, no inflation of the denominator.
+tasks.register('jacocoTestReport', JacocoReport) {
+    dependsOn 'testDebugUnitTest'
+    group = 'verification'
+    description = 'Generate JaCoCo line/branch coverage report for debug unit tests'
+
+    reports {
+        xml.required = true   // machine-readable for CI / future coverage tooling
+        html.required = true  // human-readable HTML report
+    }
+
+    def exclusions = project.ext.coverageExclusions
+
+    // Use layout.buildDirectory (Gradle 8.x provider API) instead of deprecated `buildDir`.
+    // Kotlin + Java outputs are unioned so coverage stays accurate regardless of which
+    // language the production code is written in (see "Source-set coverage" comment above).
+    classDirectories.setFrom(
+        fileTree(dir: layout.buildDirectory.dir("tmp/kotlin-classes/debug"), excludes: exclusions),
+        fileTree(dir: layout.buildDirectory.dir("intermediates/javac/debug/compileDebugJavaWithJavac/classes"), excludes: exclusions),
+    )
+    sourceDirectories.setFrom(files(['src/main/java', 'src/main/kotlin']))
+    // Path written by the `jacoco` Gradle plugin for testDebugUnitTest.
+    // If coverage drops to 0% after an AGP upgrade, check whether the exec file
+    // moved — AGP 7.x+ can use `build/outputs/unit_test_code_coverage/debugUnitTest/
+    // testDebugUnitTest.exec` when its own coverage instrumentation is enabled.
+    executionData.setFrom(layout.buildDirectory.files('jacoco/testDebugUnitTest.exec'))
+}
+
+/**
+ * Coverage gate: hard-fail the build if line coverage drops below 80%.
+ *
+ * Reuses the same exclusion / class-directory / source-directory / execution-data shape
+ * as `jacocoTestReport` above. Depends directly on `testDebugUnitTest` (not on
+ * `jacocoTestReport`) because `JacocoCoverageVerification` runs its own analysis over the
+ * `.exec` file — it does not consume the report's XML/HTML output. Forcing a report pass
+ * just to run the gate would waste CI time when someone only wants verification. CI still
+ * invokes both tasks when both artifacts and gating are wanted.
+ */
+tasks.register('jacocoCoverageVerification', JacocoCoverageVerification) {
+    dependsOn 'testDebugUnitTest'
+    group = 'verification'
+    description = 'Fail build if JaCoCo line coverage drops below 80%'
+
+    // Shared with `jacocoTestReport`. Single source of truth at
+    // `project.ext.coverageExclusions` (top of file) so a one-sided edit can't make the
+    // gate and the report compute different coverage numbers.
+    def verifyExclusions = project.ext.coverageExclusions
+
+    violationRules {
+        rule {
+            element = 'BUNDLE'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+        }
+    }
+
+    classDirectories.setFrom(
+        fileTree(dir: layout.buildDirectory.dir("tmp/kotlin-classes/debug"), excludes: verifyExclusions),
+        fileTree(dir: layout.buildDirectory.dir("intermediates/javac/debug/compileDebugJavaWithJavac/classes"), excludes: verifyExclusions),
+    )
+    sourceDirectories.setFrom(files(['src/main/java', 'src/main/kotlin']))
+    executionData.setFrom(layout.buildDirectory.files('jacoco/testDebugUnitTest.exec'))
+}
+
+// Wire into the standard Gradle `check` lifecycle so `./gradlew check` honors the 80%
+// gate. CI's `unit-tests.yaml` invokes `jacocoCoverageVerification` explicitly; this hook
+// catches local-dev runs and any future CI job that only calls `check`.
+tasks.named('check').configure {
+    dependsOn('jacocoCoverageVerification')
 }
 
 dependencies {
@@ -48,10 +216,17 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
     implementation 'androidx.annotation:annotation:1.8.2'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.7'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.7'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1'
     testImplementation 'junit:junit:4.13.2'
+    // InstantTaskExecutorRule for LiveData assertions in pure JVM tests. Lets .setValue()
+    // skip the main-thread check so ViewModel form-validation tests can observe values
+    // synchronously without Robolectric.
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 
@@ -66,4 +241,8 @@ dependencies {
 
     //Apple login
     implementation 'net.openid:appauth:0.11.1'
+
+    // Hilt — CCS-3694 (minimal DI setup)
+    implementation 'com.google.dagger:hilt-android:2.51.1'
+    ksp 'com.google.dagger:hilt-compiler:2.51.1'
 }
