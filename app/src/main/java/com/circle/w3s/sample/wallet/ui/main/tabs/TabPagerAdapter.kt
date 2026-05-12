@@ -16,117 +16,34 @@
 
 package com.circle.w3s.sample.wallet.ui.main.tabs
 
-import android.app.ActivityManager
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.PagerAdapter
-import circle.programmablewallet.sdk.WalletSdk
-import circle.programmablewallet.sdk.api.ExecuteEvent
-import circle.programmablewallet.sdk.presentation.EventListener
-import circle.programmablewallet.sdk.presentation.SecurityQuestion
-import com.circle.w3s.sample.wallet.CustomActivity
-import com.circle.w3s.sample.wallet.MainActivity
-import com.circle.w3s.sample.wallet.R
-import com.circle.w3s.sample.wallet.pwcustom.MyLayoutProvider
-import com.circle.w3s.sample.wallet.pwcustom.MyViewSetterProvider
-import com.circle.w3s.sample.wallet.ui.alert.AlertBar
-import com.circle.w3s.sample.wallet.ui.main.MainViewModel
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class TabPagerAdapter(mainActivity: MainActivity) : PagerAdapter(), EventListener {
-    private val activity = mainActivity
-    override fun getCount(): Int {
-        return 3
-    }
+class TabPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
 
-    override fun isViewFromObject(view: View, o: Any): Boolean {
-        return o === view
-    }
+    override fun getItemCount(): Int = TAB_COUNT
 
-    override fun getPageTitle(position: Int): CharSequence? {
-        return "Page: Item${position + 1}"
-    }
+    override fun createFragment(position: Int): Fragment = tabFragmentFor(position)
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view: View
-        val page: ITabPage
-        when (position) {
-            0 -> {
-                page = TabPageSocial(activity)
-            }
+    companion object {
+        const val TAB_COUNT = 3
 
-            1 -> {
-                page = TabPageEmail(activity)
-            }
+        // Set on the ViewPager2 so every tab's view stays attached. Pinned next to TAB_COUNT
+        // so the two stay in lock-step; the mapping test asserts the relationship.
+        const val OFFSCREEN_PAGE_LIMIT_FOR_FULL_RESIDENCY = TAB_COUNT - 1
 
-            2 -> {
-                page = TabPagePin(activity)
-            }
+        // Titles live next to the mapping so position 0/1/2 → Social/Email/PIN stays in lock-step.
+        // TabLayoutMediator in MainActivity reads these by index.
+        val TAB_TITLES: List<String> = listOf("Social", "Email", "PIN")
 
-            else -> {
-                page = TabPagePin(activity)
-            }
+        // Fails fast on an unexpected position rather than silently substituting a tab.
+        // getItemCount() pins the valid range to 0..TAB_COUNT-1.
+        internal fun tabFragmentFor(position: Int): Fragment = when (position) {
+            0 -> TabPageSocialFragment()
+            1 -> TabPageEmailFragment()
+            2 -> TabPagePinFragment()
+            else -> error("Unexpected tab position: $position")
         }
-
-        page.let {
-            view = page.initPage(activity.applicationContext)
-            container.addView(view)
-        }
-        setupSdk(activity.applicationContext)
-
-        return view
-    }
-
-    override fun destroyItem(container: ViewGroup, position: Int, any: Any) {
-        container.removeView(any as View)
-    }
-
-
-    private fun setupSdk(context: Context) {
-        WalletSdk.addEventListener(this)
-        context?.let {
-            WalletSdk.setLayoutProvider(MyLayoutProvider(it))
-            WalletSdk.setViewSetterProvider(MyViewSetterProvider(it))
-            WalletSdk.setCustomUserAgent("ANDROID-SAMPLE-APP-WALLETS")
-        }
-        WalletSdk.setSecurityQuestions(
-            arrayOf(
-                SecurityQuestion("What is your father’s middle name?"),
-                SecurityQuestion("What is your favorite sports team?"),
-                SecurityQuestion("What is your mother’s maiden name?"),
-                SecurityQuestion("What is the name of your first pet?"),
-                SecurityQuestion("What is the name of the city you were born in?"),
-                SecurityQuestion("What is the name of the first street you lived on?"),
-                SecurityQuestion(
-                    "When is your father’s birthday?",
-                    SecurityQuestion.InputType.datePicker
-                )
-            )
-        )
-    }
-
-
-    override fun onEvent(event: ExecuteEvent) {
-        if (event == ExecuteEvent.forgotPin || event == ExecuteEvent.resendOtp) {
-            goCustom(activity, activity.getString(R.string.register_callback))
-        }
-    }
-
-    private fun goCustom(context: Context?, msg: String?) {
-        context ?: return
-        val b = Bundle()
-        b.putString(CustomActivity.ARG_MSG, msg)
-        val intent = Intent(
-            context,
-            CustomActivity::class.java
-        ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        intent.putExtras(b)
-        context.startActivity(intent)
-        activity.overridePendingTransition(circle.programmablewallet.sdk.R.anim.no_anim, circle.programmablewallet.sdk.R.anim.no_anim)
     }
 }

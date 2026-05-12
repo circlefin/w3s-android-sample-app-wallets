@@ -22,21 +22,26 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import circle.programmablewallet.sdk.WalletSdk
-import circle.programmablewallet.sdk.api.ApiError
-import circle.programmablewallet.sdk.api.Callback
-import circle.programmablewallet.sdk.api.ExecuteWarning
-import circle.programmablewallet.sdk.result.ExecuteResult
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.circle.w3s.sample.wallet.databinding.ActivitySocialExecuteBinding
+import com.circle.w3s.sample.wallet.ui.ExecuteViewModel
 import com.circle.w3s.sample.wallet.ui.alert.AlertBar
+import com.circle.w3s.sample.wallet.ui.main.ExecuteDirections
+import com.circle.w3s.sample.wallet.ui.main.ExecuteUiState
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 
-class ExecuteActivity : AppCompatActivity(), View.OnClickListener,
-    Callback<ExecuteResult> {
+@AndroidEntryPoint
+class ExecuteActivity : AppCompatActivity(), View.OnClickListener {
     private val TAG: String = "APP.SocialExecuteActivity"
     private lateinit var binding: ActivitySocialExecuteBinding
+    private val viewModel: ExecuteViewModel by viewModels()
 
 
     companion object {
@@ -76,15 +81,20 @@ class ExecuteActivity : AppCompatActivity(), View.OnClickListener,
         // FIXME For test convenience.
 //        binding.encryptionKey.setOnClickListener(this)
 //        binding.challengeId.inputValue.setText(R.string.pw_challengeId)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.executeState.collect { state -> handleExecuteState(state) }
+            }
+        }
     }
 
     private fun executeSocial() {
-        WalletSdk.execute(
+        viewModel.execute(
             this,
             binding.userToken.content.text.toString(),
             binding.encryptionKey.text.toString(),
-            arrayOf(binding.challengeId.inputValue.text.toString()),
-            this
+            binding.challengeId.inputValue.text.toString()
         )
     }
 
@@ -97,7 +107,7 @@ class ExecuteActivity : AppCompatActivity(), View.OnClickListener,
      * Bring SDK UI to the front and finish the Activity.
      */
     private fun goBackToSdkUi() {
-        WalletSdk.moveTaskToFront(this)
+        viewModel.moveTaskToFront(this)
         finish()
     }
 
@@ -123,54 +133,60 @@ class ExecuteActivity : AppCompatActivity(), View.OnClickListener,
         clipboard.setPrimaryClip(clip)
     }
 
-    override fun onError(error: Throwable): Boolean {
-        error.printStackTrace()
-        if (error !is ApiError) {
-            AlertBar.showAlert(
-                binding.root,
-                AlertBar.Type.ALERT_FAILED,
-                error.message ?: "onError null"
-            )
-            return false // App won't handle next step, SDK will finish the Activity.
-        }
-        when (error.code) {
-            ApiError.ErrorCode.userCanceled,
-            ApiError.ErrorCode.networkError -> {
+    private fun handleExecuteState(state: ExecuteUiState) {
+        // This screen has no loading UI, so Idle/Loading both collapse to no-op.
+        //
+        // `when` used as expression + per-branch resetExecuteState so a future variant is
+        // forced to either decide its own reset policy or trip a hard compile error — avoids
+        // a fall-through path where a new non-terminal variant silently auto-resets. The
+        // `@Suppress` silences the otherwise-unavoidable `UNUSED_VARIABLE` warning this
+        // idiom produces.
+        if (state is ExecuteUiState.Error) Log.e(TAG, "execute failed", state.throwable)
+        @Suppress("UNUSED_VARIABLE")
+        val exhaustiveWhen: Unit = when (val d = viewModel.computeExecuteDirections(state)) {
+            is ExecuteDirections.None -> Unit
+            is ExecuteDirections.ShowLoading -> Unit
+            is ExecuteDirections.NavigateSuccess -> {
+                AlertBar.showAlert(
+                    binding.root,
+                    AlertBar.Type.ALERT_SUCCESS,
+                    getString(R.string.execute_successful),
+                )
+                viewModel.resetExecuteState()
+            }
+            is ExecuteDirections.NavigateWarning -> {
                 AlertBar.showAlert(
                     binding.root,
                     AlertBar.Type.ALERT_FAILED,
-                    error.code.value.toString() + " " + error.message
+                    "${d.warning.warningType}, ${d.warning.warningString}, " +
+                        "${d.result?.resultType?.name}, ${d.result?.status?.name}, ${d.result?.data?.signature}",
                 )
-                return false // App won't handle next step, SDK will finish the Activity.
+                viewModel.resetExecuteState()
             }
-
-            else -> {
+            is ExecuteDirections.NavigateTransientError -> {
                 AlertBar.showAlert(
                     binding.root,
                     AlertBar.Type.ALERT_FAILED,
-                    error.message
+                    "${d.code} ${d.message}",
                 )
+                viewModel.resetExecuteState()
+            }
+            is ExecuteDirections.GoCustom -> {
+                AlertBar.showAlert(
+                    binding.root,
+                    AlertBar.Type.ALERT_FAILED,
+                    d.message ?: "onError null",
+                )
+                viewModel.resetExecuteState()
+            }
+            is ExecuteDirections.NavigateGenericError -> {
+                AlertBar.showAlert(
+                    binding.root,
+                    AlertBar.Type.ALERT_FAILED,
+                    d.message,
+                )
+                viewModel.resetExecuteState()
             }
         }
-        return true // App will handle next step, SDK will keep the Activity.
-    }
-
-    override fun onWarning(warning: ExecuteWarning, result: ExecuteResult?): Boolean {
-        AlertBar.showAlert(
-            binding.root,
-            AlertBar.Type.ALERT_FAILED,
-            "${warning?.warningType}, ${warning?.warningString}, ${result?.resultType?.name}, ${result?.status?.name}, ${result?.data?.signature}"
-        )
-        //return true, App will handle next step, SDK will keep the Activity.
-        //return false, App won't handle next step, SDK will finish the Activity.
-        return false
-    }
-
-    override fun onResult(result: ExecuteResult) {
-        AlertBar.showAlert(
-            binding.root,
-            AlertBar.Type.ALERT_SUCCESS,
-            getString(R.string.execute_successful)
-        )
     }
 }

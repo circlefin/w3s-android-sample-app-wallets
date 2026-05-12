@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:name=".W3sSampleWalletApp"
         android:allowBackup="false"
         android:taskAffinity=""
         android:dataExtractionRules="@xml/data_extraction_rules"

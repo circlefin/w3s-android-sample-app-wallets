@@ -30,43 +30,49 @@ import android.text.TextPaint
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.style.URLSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.Observer
-import circle.programmablewallet.sdk.WalletSdk
-import circle.programmablewallet.sdk.api.LogoutCallback
-import circle.programmablewallet.sdk.api.SocialCallback
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import circle.programmablewallet.sdk.api.SocialProvider
 import circle.programmablewallet.sdk.presentation.SettingsManagement
-import circle.programmablewallet.sdk.result.LoginResult
 import com.circle.w3s.sample.wallet.ExecuteActivity
-import com.circle.w3s.sample.wallet.MainActivity
 import com.circle.w3s.sample.wallet.R
 import com.circle.w3s.sample.wallet.databinding.PagerSocialBinding
 import com.circle.w3s.sample.wallet.ui.NecessaryTextView
 import com.circle.w3s.sample.wallet.ui.alert.AlertBar
+import com.circle.w3s.sample.wallet.ui.main.LoginUiState
+import com.circle.w3s.sample.wallet.ui.main.MainViewModel
+import kotlinx.coroutines.launch
 
-class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickListener,
-    SocialCallback<LoginResult> {
-    private val activity = activity
-    private lateinit var binding: PagerSocialBinding
-    private lateinit var contentDeviceId: TextView
-    override fun initPage(context: Context): View {
-        val inflater = LayoutInflater.from(context)
-        binding = PagerSocialBinding.inflate(inflater)
-        initPagerSocial(activity, binding)
+private const val TAG = "TabPageSocialFragment"
+
+class TabPageSocialFragment : Fragment(), View.OnClickListener {
+    private val viewModel: MainViewModel by activityViewModels()
+    private var _binding: PagerSocialBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = PagerSocialBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    private fun initPagerSocial(activity: MainActivity, binding: PagerSocialBinding) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.deviceId.title.setText(R.string.label_device_id)
-        val deviceId = WalletSdk.getDeviceId(activity.baseContext)
-        contentDeviceId = binding.deviceId.content
-        contentDeviceId.setText(deviceId)
-        contentDeviceId.setOnClickListener(this)
+        binding.deviceId.content.text = viewModel.getDeviceId(requireContext())
+        binding.deviceId.content.setOnClickListener(this)
 
         val appId: NecessaryTextView = binding.appId.inputTitle
         appId.setNecessary(true)
@@ -82,25 +88,14 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
         deviceEncryptionKeyTitle.setText(R.string.label_device_encryption_key)
 
         binding.tvSocialDes.movementMethod = LinkMovementMethod.getInstance()
-        val context = binding.tvSocialDes.context
-        val text = context.getString(R.string.label_guide)
-        val docs = context.getString(R.string.label_doc)
+        val text = requireContext().getString(R.string.label_guide)
+        val docs = requireContext().getString(R.string.label_doc)
         val startInx = text.indexOf(docs)
         val endInx = startInx + docs.length
         val spannableString = SpannableString(text)
         val url = "https://developers.circle.com/w3s/docs/authentication-methods#create-a-wallet-with-social-logins"
         spannableString.setSpan(MyURLSpan(url), startInx, endInx, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.tvSocialDes.setText(spannableString, TextView.BufferType.SPANNABLE)
-
-        viewModel.executeFormState.observe(activity, Observer {
-            if (!TextUtils.isEmpty(viewModel.executeFormState.value?.socialUserToken)
-                && !TextUtils.isEmpty(viewModel.executeFormState.value?.socialEncryptionKey)
-            ) {
-                binding.btnSocialExecute.visibility = View.VISIBLE
-            } else {
-                binding.btnSocialExecute.visibility = View.GONE
-            }
-        })
 
         binding.signInButtonGoogle.setOnClickListener(this)
         binding.signInButtonFacebook.setOnClickListener(this)
@@ -110,32 +105,37 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
         binding.signInButtonGoogle.isEnabled = false
         binding.signInButtonFacebook.isEnabled = false
         binding.signInButtonApple.isEnabled = false
-        updateUi(binding)
+        updateUi()
 
-        binding.appId.inputValue.doAfterTextChanged {
-            updateUi(binding)
-        }
-        binding.deviceToken.inputValue.doAfterTextChanged {
-            updateUi(binding)
-        }
-        binding.deviceEncryptionKey.inputValue.doAfterTextChanged {
-            updateUi(binding)
-        }
+        binding.appId.inputValue.doAfterTextChanged { updateUi() }
+        binding.deviceToken.inputValue.doAfterTextChanged { updateUi() }
+        binding.deviceEncryptionKey.inputValue.doAfterTextChanged { updateUi() }
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.loginState.collect { state -> handleLoginState(state) }
+                }
+                launch {
+                    viewModel.executeFormState.collect { state ->
+                        val visible = !TextUtils.isEmpty(state?.socialUserToken) &&
+                            !TextUtils.isEmpty(state?.socialEncryptionKey)
+                        binding.btnSocialExecute.visibility = if (visible) View.VISIBLE else View.GONE
+                    }
+                }
+            }
+        }
     }
 
-    private fun updateUi(binding: PagerSocialBinding) {
-        val context = binding.root.context
-        var enableBtn: Boolean
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
-        if (TextUtils.isEmpty(binding.deviceToken.inputValue.text.toString()) ||
-            TextUtils.isEmpty(binding.deviceEncryptionKey.inputValue.text.toString()) ||
-            TextUtils.isEmpty(binding.appId.inputValue.text.toString())
-        ) {
-            enableBtn = false
-        } else {
-            enableBtn = true
-        }
+    private fun updateUi() {
+        val enableBtn = !TextUtils.isEmpty(binding.deviceToken.inputValue.text.toString()) &&
+            !TextUtils.isEmpty(binding.deviceEncryptionKey.inputValue.text.toString()) &&
+            !TextUtils.isEmpty(binding.appId.inputValue.text.toString())
 
         binding.signInButtonGoogle.isEnabled = enableBtn
         binding.signInButtonFacebook.isEnabled = enableBtn
@@ -145,7 +145,7 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
         binding.signInButtonFacebookTv.isEnabled = enableBtn
         binding.signInButtonAppleTv.isEnabled = enableBtn
 
-        executeDataChanged(binding)
+        executeDataChanged()
     }
 
     override fun onClick(v: View?) {
@@ -160,7 +160,6 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
     }
 
     private fun goToExecute(context: Context) {
-        context ?: return
         val b = Bundle()
         b.putString(
             ExecuteActivity.ARG_ENCRYPTION_KEY,
@@ -170,93 +169,75 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
             ExecuteActivity.ARG_USER_TOKEN,
             viewModel.executeFormState.value?.socialUserToken
         )
-        val intent = Intent(
-            context,
-            ExecuteActivity::class.java
-        ).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent = Intent(context, ExecuteActivity::class.java).setFlags(
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        )
         intent.putExtras(b)
         context.startActivity(intent)
     }
 
     private fun copyDeviceId() {
-        val clipboard: ClipboardManager =
-            activity.getSystemService(AppCompatActivity.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText(contentDeviceId.text, contentDeviceId.text)
-        clipboard.setPrimaryClip(clip)
+        val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val deviceId = binding.deviceId.content.text
+        clipboard.setPrimaryClip(ClipData.newPlainText(deviceId, deviceId))
     }
 
     private fun signInSocial(socialProvider: SocialProvider) {
         initAndLaunchSdk {
-            WalletSdk.performLogout(activity, socialProvider, object : LogoutCallback {
-                override fun onComplete() {
-                    WalletSdk.performLogin(
-                        activity,
-                        socialProvider,
-                        binding.deviceToken.inputValue.text.toString(),
-                        binding.deviceEncryptionKey.inputValue.text.toString(),
-                        this@TabPageSocial
-                    )
-                }
-
-                override fun onError(error: Throwable) {
-                    AlertBar.showAlert(
-                        activity.findViewById(android.R.id.content),
-                        AlertBar.Type.ALERT_FAILED,
-                        error.message ?: "performLogout $socialProvider fail"
-                    )
-                }
-            })
+            viewModel.signInSocial(
+                requireActivity(),
+                socialProvider,
+                binding.deviceToken.inputValue.text.toString(),
+                binding.deviceEncryptionKey.inputValue.text.toString(),
+            )
         }
     }
 
-    private fun signInGoogle() {
-        signInSocial(SocialProvider.Google)
+    private fun signInGoogle() = signInSocial(SocialProvider.Google)
+    private fun signInFacebook() = signInSocial(SocialProvider.Facebook)
+    private fun signInApple() = signInSocial(SocialProvider.Apple)
+
+    private fun handleLoginState(state: LoginUiState) {
+        when (state) {
+            is LoginUiState.Idle -> Unit
+            is LoginUiState.Loading -> Unit
+            is LoginUiState.Success -> {
+                AlertBar.showAlert(
+                    binding.root,
+                    AlertBar.Type.ALERT_SUCCESS,
+                    binding.root.context.getString(R.string.action_result_login_successful)
+                )
+                val originUserToken = viewModel.executeFormState.value?.userToken
+                val originEncryptionKey = viewModel.executeFormState.value?.encryptionKey
+                val originEmailUserToken = viewModel.executeFormState.value?.emailUserToken
+                val originEmailEncryptionKey = viewModel.executeFormState.value?.emailEncryptionKey
+
+                viewModel.executeDataChanged(
+                    viewModel.executeFormState.value?.endpoint,
+                    binding.appId.inputValue.text.toString(),
+                    originUserToken,
+                    originEncryptionKey,
+                    state.result.userToken,
+                    state.result.encryptionKey,
+                    originEmailUserToken,
+                    originEmailEncryptionKey,
+                    null,
+                )
+                viewModel.resetLoginState()
+            }
+            is LoginUiState.Error -> {
+                Log.e(TAG, "social login failed", state.throwable)
+                AlertBar.showAlert(
+                    binding.root,
+                    AlertBar.Type.ALERT_FAILED,
+                    state.throwable.message ?: "onError null"
+                )
+                viewModel.resetLoginState()
+            }
+        }
     }
 
-    private fun signInFacebook() {
-        signInSocial(SocialProvider.Facebook)
-    }
-
-    private fun signInApple() {
-        signInSocial(SocialProvider.Apple)
-    }
-
-    override fun onError(error: Throwable) {
-        error.printStackTrace()
-        AlertBar.showAlert(
-            binding.root,
-            AlertBar.Type.ALERT_FAILED,
-            error.message ?: "onError null"
-        )
-    }
-
-    override fun onResult(result: LoginResult) {
-        AlertBar.showAlert(
-            binding.root,
-            AlertBar.Type.ALERT_SUCCESS,
-            binding.root.context.getString(R.string.action_result_login_successful)
-        )
-        val originUserToken = viewModel.executeFormState.value?.userToken
-        val originEncryptionKey = viewModel.executeFormState.value?.encryptionKey
-
-        val originEmailUserToken = viewModel.executeFormState.value?.emailUserToken
-        val originEmailEncryptionKey = viewModel.executeFormState.value?.emailEncryptionKey
-
-
-        viewModel.executeDataChanged(
-            viewModel.executeFormState.value?.endpoint,
-            binding.appId.inputValue.text.toString(),
-            originUserToken,
-            originEncryptionKey,
-            result.userToken,
-            result.encryptionKey,
-            originEmailUserToken,
-            originEmailEncryptionKey,
-            null,
-        )
-    }
-
-    private fun executeDataChanged(binding: PagerSocialBinding) {
+    private fun executeDataChanged() {
         val originEndpoint = viewModel.executeFormState.value?.endpoint ?: ""
         var appId: String? = binding.appId.inputValue.text.toString()
         if (TextUtils.isEmpty(appId)) {
@@ -264,13 +245,10 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
         }
         val originUserToken = viewModel.executeFormState.value?.userToken
         val originEncryptionKey = viewModel.executeFormState.value?.encryptionKey
-
         val originSocialUserToken = viewModel.executeFormState.value?.socialUserToken
         val originSocialEncryptionKey = viewModel.executeFormState.value?.socialEncryptionKey
-
         val originEmailUserToken = viewModel.executeFormState.value?.emailUserToken
         val originEmailEncryptionKey = viewModel.executeFormState.value?.emailEncryptionKey
-
         val originChallengeId = viewModel.executeFormState.value?.challengeId
         viewModel.executeDataChanged(
             originEndpoint,
@@ -288,20 +266,17 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
     private inline fun initAndLaunchSdk(launchBlock: () -> Unit) {
         try {
             val settingsManagement = SettingsManagement()
-
-            WalletSdk.init(
-                binding.root.context,
-                WalletSdk.Configuration(
-                    viewModel.executeFormState.value?.endpoint,
-                    viewModel.executeFormState.value?.appId,
-                    settingsManagement
-                )
+            viewModel.initSdk(
+                requireContext().applicationContext,
+                viewModel.executeFormState.value?.endpoint.orEmpty(),
+                viewModel.executeFormState.value?.appId.orEmpty(),
+                settingsManagement,
             )
-        } catch (t: Throwable) {
+        } catch (e: Exception) {
             AlertBar.showAlert(
                 binding.root,
                 AlertBar.Type.ALERT_FAILED,
-                t.message ?: "initSdk catch null"
+                e.message ?: "initSdk catch null"
             )
             return
         }
@@ -320,7 +295,7 @@ class TabPageSocial(activity: MainActivity) : ITabPage(activity), View.OnClickLi
 
         override fun updateDrawState(ds: TextPaint) {
             super.updateDrawState(ds)
-            ds.setTypeface(Typeface.DEFAULT_BOLD)
+            ds.typeface = Typeface.DEFAULT_BOLD
             ds.isUnderlineText = false
         }
     }
